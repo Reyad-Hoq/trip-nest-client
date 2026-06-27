@@ -45,11 +45,11 @@ const quickLinks = [
 
 export default function Footer() {
   return (
-    <footer className="mt-24 bg-[#1A1D7E] text-white">
+    <footer className="mt-24 bg-[#1A1D7E] text-white text-xs">
 
       <div className="mx-auto max-w-4xl px-6 lg:px-8 py-16">
 
-        <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-4">
 
           {/* Logo */}
 
@@ -60,12 +60,12 @@ export default function Footer() {
               className="flex items-center gap-3"
             >
               <BsTrainFreightFront
-                size={45}
+                size={40}
               />
 
               <div>
 
-                <h2 className="text-xl font-extrabold tracking-tight text-white">
+                <h2 className="text-lg font-extrabold tracking-tight text-white">
                   TripNest
                 </h2>
 
@@ -104,7 +104,7 @@ export default function Footer() {
 
           <div>
 
-            <h3 className="mb-6 text-xl font-semibold">
+            <h3 className="mb-6 text-lg font-semibold">
               Quick Links
             </h3>
 
@@ -133,136 +133,114 @@ export default function Footer() {
           </div>
 
           {/* Contact */}
-
           <div>
-
-            <h3 className="mb-6 text-xl font-semibold">
+            <h3 className="mb-6 text-lg font-semibold text-white">
               Contact Info
             </h3>
 
-            <div className="space-y-6">
+            <div className="space-y-5">
 
-              <div className="flex gap-4">
-
-                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-white/10">
-
-                  <MdEmail
-                    size={22}
-                    className="text-sky-400"
-                  />
-
+              {/* Email */}
+              <div className="flex items-center gap-4">
+                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-white/10">
+                  <MdEmail size={22} className="text-sky-400" />
                 </div>
 
                 <div>
-
-                  <p className="font-medium">
+                  <p className="text-sm font-medium text-white">
                     Email
                   </p>
-
-                  <p className="text-slate-300">
+                  <a
+                    href="mailto:support@tripnest.com"
+                    className="text-xs text-slate-300 transition hover:text-sky-400"
+                  >
                     support@tripnest.com
-                  </p>
-
+                  </a>
                 </div>
-
               </div>
 
-              <div className="flex gap-4">
-
-                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-white/10">
-
-                  <MdPhone
-                    size={22}
-                    className="text-sky-400"
-                  />
-
+              {/* Phone */}
+              <div className="flex items-center gap-4">
+                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-white/10">
+                  <MdPhone size={22} className="text-sky-400" />
                 </div>
 
                 <div>
-
-                  <p className="font-medium">
+                  <p className="text-sm font-medium text-white">
                     Phone
                   </p>
-
-                  <p className="text-slate-300">
+                  <a
+                    href="tel:+8801700000000"
+                    className="text-xs text-slate-300 transition hover:text-sky-400"
+                  >
                     +880 1700-000000
-                  </p>
-
+                  </a>
                 </div>
-
               </div>
 
-              <div className="flex gap-4">
-
-                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-white/10">
-
-                  <MdLocationOn
-                    size={22}
-                    className="text-sky-400"
-                  />
-
+              {/* Facebook */}
+              <div className="flex items-center gap-4">
+                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-white/10">
+                  <FaFacebookF size={18} className="text-sky-400" />
                 </div>
 
                 <div>
-
-                  <p className="font-medium">
+                  <p className="text-sm font-medium text-white">
                     Facebook
                   </p>
-
-                  <p className="text-slate-300">
+                  <a
+                    href="https://facebook.com/tripnest"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-xs text-slate-300 transition hover:text-sky-400"
+                  >
                     facebook.com/tripnest
-                  </p>
-
+                  </a>
                 </div>
-
               </div>
 
             </div>
-
           </div>
-
           {/* Payment */}
 
           <div>
 
-            <h3 className="mb-6 text-xl font-semibold">
+            <h3 className="mb-6 text-lg font-semibold">
               Payment Methods
             </h3>
 
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-3 gap-2">
 
-              <div className="rounded-xl bg-white p-5 flex justify-center items-center shadow">
+              <div className="rounded w-12 h-10 bg-white flex justify-center items-center shadow">
 
-                <FaStripe
+                {/* <FaStripe
                   size={42}
                   className="text-indigo-600"
-                />
-
+                /> */}
+                <img src="/stripe.svg" />
               </div>
 
-              <div className="rounded-xl bg-white p-5 flex justify-center items-center shadow">
+              <div className="rounded w-12 h-10 bg-white flex justify-center items-center shadow">
 
-                <FaCcVisa
+                {/* <FaCcVisa
                   size={42}
                   className="text-blue-700"
-                />
-
+                /> */}
+                <img src="/visa.svg" />
               </div>
 
-              <div className="rounded-xl bg-white p-5 flex justify-center items-center shadow">
+              <div className="rounded w-12 h-10 bg-white flex justify-center items-center shadow">
 
-                <FaCcMastercard
+                {/* <FaCcMastercard
                   size={42}
                   className="text-red-500"
-                />
-
+                /> */}
+                <img src="/Mastercard.svg" />
               </div>
 
-              <div className="rounded-xl bg-white p-5 flex justify-center items-center shadow">
+              <div className="rounded w-12 h-10 bg-white flex justify-center items-center shadow">
 
-                <span className="font-bold text-pink-600">
-                  bKash
-                </span>
+                <img src="/amex.svg" />
 
               </div>
 

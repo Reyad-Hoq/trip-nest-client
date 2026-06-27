@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, Button } from "@heroui/react";
 import { Ticket } from '@gravity-ui/icons';
 // import { signOut, useSession } from "@/lib/auth-client";
@@ -11,7 +11,17 @@ import { MdSpaceDashboard } from "react-icons/md";
 
 const MotionButton = motion(Button)
 const Navbar = () => {
+  const [scrolled, setScrolled] = useState(false);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 80);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   // const { data: session, isPending } = useSession()
 
@@ -61,7 +71,10 @@ const Navbar = () => {
   );
 
   return (
-    <nav className="sticky top-0 z-40 w-full border-b border-separator bg-background/70 backdrop-blur-lg">
+    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled
+        ? "bg-white shadow-lg backdrop-blur-md"
+        : "bg-transparent"
+      }`}>
       <header className="mx-auto flex h-16 max-w-4xl items-center justify-between px-6">
         <div className="flex items-center gap-4">
           <button
@@ -118,11 +131,11 @@ const Navbar = () => {
             {links}
           </ul>
           {
-            !user ? <>
+            user ? <>
               Hi, {user?.name}!
               <MotionButton
                 variant="primary"
-                className="text-red-500 bg-transparent border-1"
+                className="text-red-500 bg-transparent border-2 border-red-500"
                 whileHover={{
                   backgroundColor: "#ef4444", // red-500
                   color: "#fff",
