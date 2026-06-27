@@ -42,7 +42,7 @@ const Navbar = () => {
         }}
         transition={{ duration: 0.5 }}>
         <Link href="/tickets" className="whitespace-nowrap text-[#1A1D7E]">
-          <Ticket size={40} className="text-[#FFD230]" />
+          <Ticket className="text-[#FFD230] w-4 h-4" />
           All Tickets
         </Link>
       </motion.li>
@@ -53,7 +53,7 @@ const Navbar = () => {
         }}
         transition={{ duration: 0.5 }}>
         <Link href="/dashboard" className="whitespace-nowrap text-[#1A1D7E]">
-          <MdSpaceDashboard color="FFD230"/>
+          <MdSpaceDashboard color="FFD230" />
           Dashboard
         </Link>
       </motion.li>
@@ -98,7 +98,7 @@ const Navbar = () => {
             {/* <Logo /> */}
             <Link href="/">
               <div className="bg-primary text-[#1A1D7E] p-2 rounded-xl">
-                <BsTrainFreightFront size={48} />
+                <BsTrainFreightFront size={45} />
               </div>
 
               <div>
@@ -118,10 +118,11 @@ const Navbar = () => {
             {links}
           </ul>
           {
-            user ? <>
+            !user ? <>
               Hi, {user?.name}!
               <MotionButton
-                variant="ghost"
+                variant="primary"
+                className="text-red-500 bg-transparent border-1"
                 whileHover={{
                   backgroundColor: "#ef4444", // red-500
                   color: "#fff",
@@ -132,10 +133,10 @@ const Navbar = () => {
                 Sign Out
               </MotionButton>
             </> : <>
-              <Link href="/auth/signin" className="block py-2">
-                Signin
+              <Link href="/auth/signin" className="block py-2 text-white bg-[#1A1D7E] px-3 whitespace-nowrap text-sm rounded-full">
+                Sign In
               </Link>
-              <Button className="w-full">Get Started</Button>
+              <Button className="w-full border-2 border-[#1A1D7E] bg-transparent text-[#1A1D7E]">Register</Button>
             </>
           }
         </div>
@@ -153,7 +154,7 @@ const Navbar = () => {
                   <Link href="/auth/signin" className="block py-2">
                     Signin
                   </Link>
-                  <Button className="w-full">Get Started</Button>
+                  <Button className="w-full">Register</Button>
                 </>
               }
 
