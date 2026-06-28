@@ -43,7 +43,7 @@ export default function Banner() {
     return () => clearInterval(timer);
   }, []);
   return (
-    <section className="relative">
+    <section className="mb-24 relative">
 
       {/* Background */}
 

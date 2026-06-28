@@ -3,15 +3,19 @@
 import { useEffect, useState } from "react";
 import { Link, Button } from "@heroui/react";
 import { Ticket } from '@gravity-ui/icons';
-// import { signOut, useSession } from "@/lib/auth-client";
-import Image from "next/image";
+import { signOut, useSession } from "@/lib/auth-client";
 import { motion } from "motion/react"
 import { BsHouseFill, BsTrainFreightFront } from "react-icons/bs";
 import { MdSpaceDashboard } from "react-icons/md";
+import { usePathname } from "next/navigation";
+import Image from "next/image";
+import { ProfileDropdown } from "./ProfileDropdown";
 
-const MotionButton = motion(Button)
 const Navbar = () => {
+
   const [scrolled, setScrolled] = useState(false);
+  const pathName = usePathname();
+  const isHome = pathName === "/";
 
   useEffect(() => {
     const handleScroll = () => {
@@ -23,14 +27,11 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  // const { data: session, isPending } = useSession()
+  const { data: session, isPending } = useSession()
 
-  // const user = session?.user;
-  // const handleSignOut = async () => {
-  //   await signOut();
-  // }
-  const user = {
-    name: 'Reyad',
+  const user = session?.user;
+  const handleSignOut = async () => {
+    await signOut();
   }
   const links = (
     <>
@@ -71,9 +72,12 @@ const Navbar = () => {
   );
 
   return (
-    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled
+    <nav className={`left-0 right-0 z-50 transition-all duration-500 ${isHome
+      ? `fixed top-0 ${scrolled
         ? "bg-white shadow-lg backdrop-blur-md"
         : "bg-transparent"
+      }`
+      : "sticky top-0 bg-white shadow-lg"
       }`}>
       <header className="mx-auto flex h-16 max-w-4xl items-center justify-between px-6">
         <div className="flex items-center gap-4">
@@ -109,7 +113,7 @@ const Navbar = () => {
           </button>
           <div className="flex items-center gap-3">
             {/* <Logo /> */}
-            <Link href="/">
+            <Link href="/" className="no-underline">
               <div className="bg-primary text-[#1A1D7E] p-2 rounded-xl">
                 <BsTrainFreightFront size={45} />
               </div>
@@ -132,24 +136,15 @@ const Navbar = () => {
           </ul>
           {
             user ? <>
-              Hi, {user?.name}!
-              <MotionButton
-                variant="primary"
-                className="text-red-500 bg-transparent border-2 border-red-500"
-                whileHover={{
-                  backgroundColor: "#ef4444", // red-500
-                  color: "#fff",
-                  scale: 1.05
-                }}
-                transition={{ duration: 0.2 }}
-              >
-                Sign Out
-              </MotionButton>
+              <div className="flex items-center gap-2">
+                {user?.image || <Image src="/boy.png" width={48} height={48} alt="avatar" />}
+                <ProfileDropdown />
+              </div>
             </> : <>
-              <Link href="/auth/signin" className="block py-2 text-white bg-[#1A1D7E] px-3 whitespace-nowrap text-sm rounded-full">
+              <Link href="/auth/signin" className="block py-2 text-white bg-[#1A1D7E] px-3 whitespace-nowrap text-sm rounded-full no-underline">
                 Sign In
               </Link>
-              <Button className="w-full border-2 border-[#1A1D7E] bg-transparent text-[#1A1D7E]">Register</Button>
+              <Link href="/auth/signup" className="w-full border-2 px-2 py-1 rounded-full border-[#1A1D7E] bg-transparent text-[#1A1D7E] no-underline">Get started</Link>
             </>
           }
         </div>
@@ -162,12 +157,12 @@ const Navbar = () => {
               {
                 user ? <>
                   Hi, {user?.name}!
-                  <Button variant="ghost">Sign Out</Button>
+                  <Button onClick={handleSignOut} variant="ghost" className="bg-red-500 text-white">Sign Out</Button>
                 </> : <>
-                  <Link href="/auth/signin" className="block py-2">
+                  <Link href="/auth/signin" className="block py-2 w-full">
                     Signin
                   </Link>
-                  <Button className="w-full">Register</Button>
+                  <Button className="w-full">Get Started</Button>
                 </>
               }
 
