@@ -16,7 +16,7 @@ export default function Loading() {
             repeat: Infinity,
             ease: "easeInOut",
           }}
-          className="rounded-full bg-primary p-6 text-white shadow-2xl"
+          className="rounded-full bg-blue-900 p-6 text-white shadow-2xl"
         >
           <BsTrainFreightFrontFill size={50} />
         </motion.div>
