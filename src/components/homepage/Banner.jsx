@@ -43,7 +43,7 @@ export default function Banner() {
     return () => clearInterval(timer);
   }, []);
   return (
-    <section className="mb-24 relative">
+    <section className="relative bg-slate-50">
 
       {/* Background */}
 
@@ -103,11 +103,11 @@ export default function Banner() {
 
                 <Button
                   size="lg"
-                  color="primary"
+                  className="bg-blue-800"
                   radius="full"
-                  endContent={<FaArrowRight />}
                 >
                   Explore Tickets
+                  <FaArrowRight />
                 </Button>
 
               </div>

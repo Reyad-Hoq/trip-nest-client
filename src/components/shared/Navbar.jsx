@@ -137,7 +137,7 @@ const Navbar = () => {
           {
             user ? <>
               <div className="flex items-center gap-1">
-                {<Image src={user?.image} width={48} height={48} alt="avatar" className="rounded-full" /> || <Image src="/boy.png" width={48} height={48} alt="avatar" />}
+                {<Image src={user?.image} width={42} height={42} alt="avatar" className="rounded-full" /> || <Image src="/boy.png" width={48} height={48} alt="avatar" />}
                 <ProfileDropdown />
               </div>
             </> : <>

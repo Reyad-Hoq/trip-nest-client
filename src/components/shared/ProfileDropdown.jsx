@@ -21,7 +21,7 @@ export function ProfileDropdown() {
       <Dropdown.Popover>
         <Dropdown.Menu onAction={(key) => console.log(`Selected: ${key}`)}>
           <Dropdown.Item id="new-file" textValue="New file">
-            <Label>My Profile</Label>
+            <Label className="text-blue-900 font-semibold">My Profile</Label>
           </Dropdown.Item>
           <Dropdown.Item onClick={handleSignOut} variant="danger">
             <Label>Sign Out</Label>
