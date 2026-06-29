@@ -129,10 +129,7 @@ const RegisterPage = () => {
 
             <Input
               placeholder="Enter your full name"
-              classNames={{
-                inputWrapper:
-                  "rounded-xl border border-slate-200 shadow-none data-[focus=true]:border-[#183F98] data-[focus=true]:ring-2 data-[focus=true]:ring-[#183F98]/20",
-              }}
+
             />
 
             <FieldError />
@@ -151,10 +148,7 @@ const RegisterPage = () => {
 
             <Input
               placeholder="Enter your email"
-              classNames={{
-                inputWrapper:
-                  "rounded-xl border border-slate-200 shadow-none data-[focus=true]:border-[#183F98] data-[focus=true]:ring-2 data-[focus=true]:ring-[#183F98]/20",
-              }}
+
             />
 
             <FieldError />
@@ -181,10 +175,6 @@ const RegisterPage = () => {
 
             <Input
               placeholder="Create a secure password"
-              classNames={{
-                inputWrapper:
-                  "rounded-xl border border-slate-200 shadow-none data-[focus=true]:border-[#183F98] data-[focus=true]:ring-2 data-[focus=true]:ring-[#183F98]/20",
-              }}
             />
 
             <FieldError />

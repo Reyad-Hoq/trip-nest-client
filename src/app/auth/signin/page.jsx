@@ -61,7 +61,8 @@ const LoginPage = () => {
       setSuccessMessage("Login successful. Redirecting...");
 
       setTimeout(() => {
-        router.push("/");
+        router.refresh();
+        router.replace("/");
       }, 1200);
     }
   };
@@ -125,10 +126,7 @@ const LoginPage = () => {
 
             <Input
               placeholder="Enter your email"
-              classNames={{
-                inputWrapper:
-                  "rounded-xl border border-slate-200 shadow-none data-[focus=true]:border-[#183F98] data-[focus=true]:ring-2 data-[focus=true]:ring-[#183F98]/20",
-              }}
+
             />
 
             <FieldError />
@@ -143,10 +141,7 @@ const LoginPage = () => {
 
             <Input
               placeholder="Enter your password"
-              classNames={{
-                inputWrapper:
-                  "rounded-xl border border-slate-200 shadow-none data-[focus=true]:border-[#183F98] data-[focus=true]:ring-2 data-[focus=true]:ring-[#183F98]/20",
-              }}
+
             />
 
             <FieldError />
