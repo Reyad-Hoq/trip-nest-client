@@ -5,11 +5,12 @@ import { redirect } from "next/navigation";
 
 export default async function DashboardPage() {
   const session = await getSession()
+  console.log('session:', session)
+  const role = session?.role
   if (!session) {
     redirect("/auth/signin");
   }
 
-  const role = session?.user?.role;
 
   if (role === "admin") {
     redirect("/dashboard/admin");

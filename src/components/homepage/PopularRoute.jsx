@@ -1,4 +1,4 @@
-import { FaArrowRight } from "react-icons/fa6";
+import { FaArrowDown, FaArrowRight } from "react-icons/fa6";
 import Link from "next/link";
 
 const routes = [
@@ -50,14 +50,14 @@ export default function PopularRoutes() {
           {routes.map((route) => (
             <div
               key={route.to}
-              className="rounded-3xl border border-slate-200 bg-white p-6 shadow transition hover:-translate-y-2 hover:shadow-xl"
+              className="rounded-3xl border border-slate-200 text-center bg-white p-6 shadow transition hover:-translate-y-2 hover:shadow-xl"
             >
               <h3 className="text-xl font-bold text-[#1A1D7E]">
                 {route.from}
               </h3>
 
               <div className="my-3 flex items-center justify-center text-yellow-500">
-                <FaArrowRight />
+                <FaArrowDown />
               </div>
 
               <h3 className="text-xl font-bold text-[#183F98]">

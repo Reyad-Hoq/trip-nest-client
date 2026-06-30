@@ -11,6 +11,7 @@ import {
 } from "@gravity-ui/icons";
 import { Button, Drawer } from "@heroui/react";
 import { getSession } from '@/lib/actions/session';
+import Link from 'next/link';
 
 const DashboardSidebar = async () => {
   const user = await getSession()
@@ -67,14 +68,15 @@ const DashboardSidebar = async () => {
   const navItems = navLinksMap[user?.role];
   const navContent = <nav className="flex flex-col gap-1">
     {navItems.map((item) => (
-      <button
+      <Link
         key={item.label}
+        href={item.href}
         className="flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm text-foreground transition-colors hover:bg-default"
         type="button"
       >
         <item.icon className="size-5 text-muted" />
         {item.label}
-      </button>
+      </Link>
     ))}
   </nav>
   return (

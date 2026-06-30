@@ -1,10 +1,12 @@
 "use client";
 
 import { signOut, useSession } from "@/lib/auth-client";
-import { ChevronDownWide } from "@gravity-ui/icons";
+import { ChevronDownWide, ChevronUpWide } from "@gravity-ui/icons";
 import { Button, Dropdown, Label } from "@heroui/react";
+import { useState } from "react";
 
 export function ProfileDropdown() {
+  const [isDropDown, setIsDropDown] = useState(false);
   const { data: session, isPending } = useSession()
 
   const user = session?.user;
@@ -12,10 +14,11 @@ export function ProfileDropdown() {
     await signOut();
   }
   return (
-    <Dropdown>
+    <Dropdown onOpenChange={setIsDropDown}>
       <Button aria-label="Menu" className="bg-transparent text-blue-950">
-        <div className="flex gap-2 text-sm">
-          {user?.name}<ChevronDownWide />
+        <div className="flex items-center gap-2 text-sm">
+          {user?.name}
+          {isDropDown ? <ChevronUpWide /> : <ChevronDownWide />}
         </div>
       </Button>
       <Dropdown.Popover>

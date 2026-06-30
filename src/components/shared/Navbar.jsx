@@ -1,21 +1,23 @@
 'use client';
 
 import { useEffect, useState } from "react";
-import { Link, Button } from "@heroui/react";
+import { Link, Button, Skeleton } from "@heroui/react";
 import { Ticket } from '@gravity-ui/icons';
 import { signOut, useSession } from "@/lib/auth-client";
 import { motion } from "motion/react"
 import { BsHouseFill, BsTrainFreightFront } from "react-icons/bs";
 import { MdSpaceDashboard } from "react-icons/md";
-import { usePathname } from "next/navigation";
+import { redirect, usePathname } from "next/navigation";
 import Image from "next/image";
 import { ProfileDropdown } from "./ProfileDropdown";
+import { div } from "motion/react-client";
 
 const Navbar = () => {
 
   const [scrolled, setScrolled] = useState(false);
   const pathName = usePathname();
   const isHome = pathName === "/";
+  const isDashboard = pathName.startsWith("/dashboard");
 
   useEffect(() => {
     const handleScroll = () => {
@@ -27,47 +29,34 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+
   const { data: session, isPending } = useSession()
 
   const user = session?.user;
   const handleSignOut = async () => {
     await signOut();
+    redirect('/')
   }
   const links = (
     <>
-      <motion.li
-        whileHover={{
-          scale: 1.1,
-          transition: { duration: 0.1 }
-        }}
-        transition={{ duration: 0.5 }}>
-        <Link href="/" className="whitespace-nowrap text-[#1A1D7E]">
+      <li>
+        <Link href="/" className={`whitespace-nowrap text-[#1A1D7E] ${pathName === "/" ? "underline decoration-blue-700" : ""}`}>
           <BsHouseFill color="FFD230" />
           Home
         </Link>
-      </motion.li>
-      <motion.li
-        whileHover={{
-          scale: 1.1,
-          transition: { duration: 0.1 }
-        }}
-        transition={{ duration: 0.5 }}>
-        <Link href="/tickets" className="whitespace-nowrap text-[#1A1D7E]">
+      </li>
+      <li>
+        <Link href="/tickets" className={`whitespace-nowrap text-[#1A1D7E] ${pathName === "/tickets" ? "underline decoration-blue-700" : ""}`}>
           <Ticket className="text-[#FFD230] w-4 h-4" />
           All Tickets
         </Link>
-      </motion.li>
-      <motion.li
-        whileHover={{
-          scale: 1.1,
-          transition: { duration: 0.1 }
-        }}
-        transition={{ duration: 0.5 }}>
-        <Link href="/dashboard" className="whitespace-nowrap text-[#1A1D7E]">
+      </li>
+      <li>
+        <Link href="/dashboard" className={`whitespace-nowrap text-[#1A1D7E] ${isDashboard ? "underline decoration-blue-700" : ""}`}>
           <MdSpaceDashboard color="FFD230" />
           Dashboard
         </Link>
-      </motion.li>
+      </li>
     </>
   );
 
@@ -131,27 +120,34 @@ const Navbar = () => {
         </div>
 
         <div className="hidden items-center gap-4 md:flex">
-          <ul className="hidden items-center gap-4 border-r-2 border-amber-300 pr-4 md:flex">
+          <ul className="hidden items-center gap-5 border-r-2 border-amber-300 pr-4 md:flex">
             {links}
           </ul>
           {
-            user ? <>
-              <div className="flex items-center gap-1">
-                {<Image
-                  src={user?.image?.trim() ? user.image : "/boy.png"}
-                  width={42}
-                  height={42}
-                  alt="avatar"
-                  className="rounded-full"
-                />}
-                <ProfileDropdown />
+            isPending ? (
+              <div className="flex items-center gap-2">
+                <Skeleton className="h-10 w-10 rounded-full" />
+                <Skeleton className="h-5 w-20 rounded-lg" />
               </div>
-            </> : <>
-              <Link href="/auth/signin" className="block py-2 text-white bg-[#1A1D7E] px-3 whitespace-nowrap text-sm rounded-full no-underline">
-                Sign In
-              </Link>
-              <Link href="/auth/signup" className="w-full border-2 px-2 py-1 rounded-full border-[#1A1D7E] bg-transparent text-[#1A1D7E] no-underline">Get started</Link>
-            </>
+            ) :
+              user ? <>
+                <div className="flex items-center gap-1">
+
+                  {<Image
+                    src={user?.image?.trim() ? user.image : "/boy.png"}
+                    width={42}
+                    height={42}
+                    alt="avatar"
+                    className="rounded-full"
+                  />}
+                  <ProfileDropdown />
+                </div>
+              </> : <>
+                <Link href="/auth/signin" className="block py-2 text-white bg-[#1A1D7E] px-3 whitespace-nowrap text-sm rounded-full no-underline">
+                  Sign In
+                </Link>
+                <Link href="/auth/signup" className="w-full border-2 px-2 py-1 rounded-full border-[#1A1D7E] bg-transparent text-[#1A1D7E] no-underline">Get started</Link>
+              </>
           }
         </div>
       </header>
