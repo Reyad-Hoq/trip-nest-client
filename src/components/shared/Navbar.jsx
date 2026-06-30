@@ -69,7 +69,24 @@ const Navbar = () => {
       : "sticky top-0 bg-white shadow-lg"
       }`}>
       <header className="mx-auto flex h-16 max-w-4xl items-center justify-between px-6">
-        <div className="flex items-center gap-4">
+        <div className="flex items-center justify-between gap-5 w-full">
+          <div className="flex items-center gap-3">
+            {/* <Logo /> */}
+            <Link href="/" className="no-underline">
+              <div className="bg-primary text-[#1A1D7E] p-2 rounded-xl">
+                <BsTrainFreightFront size={45} />
+              </div>
+
+              <div>
+                <h2 className="text-2xl font-extrabold tracking-tight bg-linear-to-r from-[#1A1D7E] via-[#0D2284] to-[#183F98] bg-clip-text text-transparent">
+                  TripNest
+                </h2>
+                <p className="text-[11px] text-default-500">
+                  Book Smarter. Travel Better.
+                </p>
+              </div>
+            </Link>
+          </div>
           <button
             className="md:hidden"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -100,23 +117,6 @@ const Navbar = () => {
               )}
             </svg>
           </button>
-          <div className="flex items-center gap-3">
-            {/* <Logo /> */}
-            <Link href="/" className="no-underline">
-              <div className="bg-primary text-[#1A1D7E] p-2 rounded-xl">
-                <BsTrainFreightFront size={45} />
-              </div>
-
-              <div>
-                <h2 className="text-2xl font-extrabold tracking-tight bg-linear-to-r from-[#1A1D7E] via-[#0D2284] to-[#183F98] bg-clip-text text-transparent">
-                  TripNest
-                </h2>
-                <p className="text-[11px] text-default-500">
-                  Book Smarter. Travel Better.
-                </p>
-              </div>
-            </Link>
-          </div>
         </div>
 
         <div className="hidden items-center gap-4 md:flex">
