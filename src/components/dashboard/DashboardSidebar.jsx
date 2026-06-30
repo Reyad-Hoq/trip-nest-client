@@ -1,3 +1,4 @@
+'use client';
 import React from 'react';
 
 import {
@@ -12,11 +13,11 @@ import {
 import { Button, Drawer } from "@heroui/react";
 import { getSession } from '@/lib/actions/session';
 import Link from 'next/link';
-import { redirect } from 'next/navigation';
+import { redirect, usePathname } from 'next/navigation';
 
-const DashboardSidebar = async () => {
-  const user = await getSession()
-
+const DashboardSidebar = ({ user }) => {
+  const pathName = usePathname();
+  const isActive = (href) => pathName.startsWith(href);
   const userNavLinks = [
     {
       icon: Person,
@@ -74,29 +75,36 @@ const DashboardSidebar = async () => {
       <Link
         key={item.label}
         href={item.href}
-        className="flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm text-foreground transition-colors hover:bg-default"
+        className={`flex items-center gap-3 rounded-xl px-3 py-2.5 transition-all ${isActive(item.href)
+          ? "bg-blue-800 text-white"
+          : "text-foreground hover:bg-default"
+          }`}
         type="button"
       >
-        <item.icon className="size-5 text-muted" />
+        <item.icon className={`size-5 text-muted  ${isActive(item.href)
+          ? " text-white"
+          : "text-foreground hover:bg-default"
+          }  `} />
         {item.label}
       </Link>
     ))}
   </nav>
   return (
-    <>
+    <div className='py-2 px-1'>
       <aside className='hidden lg:block w-64 border-r border-default p-4 shrink-0'>
         {navContent}
       </aside>
       <Drawer>
-        <Button className="lg:hidden" variant="secondary">
+        <Button className="lg:hidden bg-blue-800 text-white " variant="secondary">
           <LayoutSideContentLeft />
+          Dashboard
         </Button>
         <Drawer.Backdrop>
           <Drawer.Content placement="left">
             <Drawer.Dialog>
               <Drawer.CloseTrigger />
               <Drawer.Header>
-                <Drawer.Heading>Navigation</Drawer.Heading>
+                <Drawer.Heading>Dashboard</Drawer.Heading>
               </Drawer.Header>
               <Drawer.Body>
                 {navContent}
@@ -105,7 +113,7 @@ const DashboardSidebar = async () => {
           </Drawer.Content>
         </Drawer.Backdrop>
       </Drawer>
-    </>
+    </div>
   );
 };
 

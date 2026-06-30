@@ -1,10 +1,18 @@
 import DashboardSidebar from "@/components/dashboard/DashboardSidebar";
+import { getSession } from "@/lib/actions/session";
+import { redirect } from "next/navigation";
 
-const DashboardLayout = ({ children }) => {
+const DashboardLayout = async ({ children }) => {
+  const user = await getSession();
+
+  if (!user) {
+    redirect("/auth/signin");
+  }
+
   return (
-    <div className='flex min-h-screen'>
-      <DashboardSidebar />
-      <div className='flex-1'>
+    <div className="flex min-h-screen">
+      <DashboardSidebar user={user} />
+      <div className="flex-1">
         {children}
       </div>
     </div>
