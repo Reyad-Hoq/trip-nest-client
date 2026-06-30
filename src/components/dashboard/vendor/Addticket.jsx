@@ -90,6 +90,13 @@ export default function AddTicketPage() {
       console.log(ticket);
 
       // Part-2 এ backend request হবে
+      const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/tickets`, {
+        method: "POST",
+        headers: {
+          'content-type': 'application/json',
+        },
+        body: JSON.stringify(ticket),
+      })
       setSuccess("Ticket added successfully!");
     } catch (err) {
       console.error(err);
@@ -269,7 +276,7 @@ export default function AddTicketPage() {
                 <Person className="size-4 text-[#1A1D7E]" />
                 Vendor Name
               </Label>
-              <Input readOnly />
+              <Input />
             </TextField>
 
             <TextField name="vendorEmail" value={user?.email || ""}>
@@ -277,7 +284,7 @@ export default function AddTicketPage() {
                 <Envelope className="size-4 text-[#1A1D7E]" />
                 Vendor Email
               </Label>
-              <Input readOnly />
+              <Input />
             </TextField>
           </div>
 
