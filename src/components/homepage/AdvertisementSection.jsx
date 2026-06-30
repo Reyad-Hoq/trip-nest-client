@@ -53,6 +53,7 @@ export default async function AdvertisementSection() {
                 <Image
                   src={ticket.image}
                   alt={ticket.title}
+                  sizes="(max-width: 512px) 100vw, 512px"
                   fill
                   className="object-cover transition duration-500 group-hover:scale-110"
                 />

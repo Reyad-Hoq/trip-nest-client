@@ -37,7 +37,7 @@ export default async function TicketsPage() {
           {tickets.map((ticket) => (
 
             <div
-              key={ticket.id}
+              key={ticket._id}
               className="group overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-md transition duration-300 hover:-translate-y-2 hover:shadow-2xl"
             >
 
@@ -48,6 +48,7 @@ export default async function TicketsPage() {
                 <Image
                   src={ticket.image}
                   alt={ticket.title}
+                  sizes="(max-width: 512px) 100vw, auto"
                   fill
                   className="object-cover transition duration-500 group-hover:scale-110"
                 />

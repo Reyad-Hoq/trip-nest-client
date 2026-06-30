@@ -84,9 +84,10 @@ export default function AddTicketPage() {
       const formData = new FormData(e.currentTarget);
       const ticket = Object.fromEntries(formData.entries());
 
+
       ticket.image = imageUrl;
       ticket.perks = selected;
-
+      ticket.status = "available"
       console.log(ticket);
 
       // Part-2 এ backend request হবে
@@ -135,7 +136,7 @@ export default function AddTicketPage() {
               <Input placeholder="Dhaka → Cox's Bazar" />
               <FieldError />
             </TextField>
-
+            {/* Transport  */}
             <Select name="transport" className="w-full" placeholder="Select one" isRequired>
               <Label>Transport Type</Label>
               <Select.Trigger>
