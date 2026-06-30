@@ -12,10 +12,10 @@ import {
 import { Button, Drawer } from "@heroui/react";
 import { getSession } from '@/lib/actions/session';
 import Link from 'next/link';
+import { redirect } from 'next/navigation';
 
 const DashboardSidebar = async () => {
   const user = await getSession()
-  console.log('user:', user.role)
 
   const userNavLinks = [
     {
@@ -64,6 +64,9 @@ const DashboardSidebar = async () => {
   const navLinksMap = {
     user: userNavLinks,
     vendor: vendorNavLinks,
+  }
+  if (!user) {
+    redirect("/auth/signin");
   }
   const navItems = navLinksMap[user?.role];
   const navContent = <nav className="flex flex-col gap-1">
