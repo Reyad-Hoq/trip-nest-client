@@ -36,7 +36,7 @@ export default function Countdown({ departure }) {
 
   if (!timeLeft) {
     return (
-      <div className="rounded-2xl bg-red-500/20 p-6 text-center">
+      <div className="rounded-2xl bg-red-500/70 p-6 text-center">
         <h2 className="text-2xl font-bold text-white">
           Departure Closed
         </h2>

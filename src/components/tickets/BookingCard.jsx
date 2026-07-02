@@ -1,7 +1,9 @@
 "use client";
+import { useMemo, useState } from "react";
+import {
+  Button,
+} from "@heroui/react";
 
-import { useMemo } from "react";
-import { Button } from "@heroui/react";
 import {
   Calendar,
   Clock,
@@ -10,174 +12,138 @@ import {
   ArrowRight,
 } from "@gravity-ui/icons";
 
-export default function BookingCard({ ticket }) {
-  const departureDate = new Date(ticket.departure);
+import BookingModal from "./BookingModal";
 
+export default function BookingCard({ ticket }) {
+
+  const departureDate = new Date(ticket.departure);
   const now = new Date();
 
   const isExpired = departureDate <= now;
-
   const noSeat = ticket.availableSeats <= 0;
 
   const bookingDisabled = isExpired || noSeat;
 
   const statusText = useMemo(() => {
     if (isExpired) return "Departure Closed";
-
     if (noSeat) return "Sold Out";
-
     return "Available";
   }, [isExpired, noSeat]);
 
   return (
-    <aside className="lg:sticky lg:top-24 h-fit">
+    <>
+      <aside className="sticky top-24 h-fit">
 
-      <div className="overflow-hidden rounded-3xl bg-white shadow-xl">
+        <div className="overflow-hidden rounded-3xl bg-white shadow-xl">
 
-        {/* Header */}
+          {/* Header */}
 
-        <div className="bg-gradient-to-r from-[#1A1D7E] via-[#0D2284] to-[#183F98] p-6 text-white">
+          <div className="bg-gradient-to-r from-[#1A1D7E] via-[#0D2284] to-[#183F98] p-6 text-white">
 
-          <p className="text-sm opacity-80">
-            Price
-          </p>
+            <p className="text-sm opacity-80">
+              Price
+            </p>
 
-          <h2 className="mt-1 text-4xl font-extrabold">
-            ৳ {ticket.price}
-          </h2>
+            <h2 className="mt-2 text-4xl font-extrabold">
+              ৳ {ticket.price}
+            </h2>
 
-          <p className="text-sm opacity-80">
-            per ticket
-          </p>
+            <p className="text-sm opacity-80">
+              Per Ticket
+            </p>
 
-        </div>
+          </div>
 
-        {/* Content */}
+          <div className="space-y-5 p-6">
 
-        <div className="space-y-5 p-6">
+            {/* Seats */}
 
-          {/* Seats */}
+            <div className="flex items-center justify-between rounded-xl bg-slate-100 p-4">
 
-          <div className="flex items-center justify-between rounded-xl bg-slate-100 p-4">
+              <div className="flex items-center gap-2">
 
-            <div className="flex items-center gap-2">
+                <Ticket className="text-[#1A1D7E]" />
 
-              <Ticket className="text-[#1A1D7E]" />
-
-              <span>
                 Available Seats
+
+              </div>
+
+              <span className="font-bold text-[#1A1D7E]">
+                {ticket.availableSeats || "N/A"}
               </span>
 
             </div>
 
-            <span className="font-bold text-[#1A1D7E]">
-              {ticket.availableSeats}
-            </span>
+            {/* Seat */}
 
-          </div>
+            <div className="flex items-center justify-between rounded-xl border p-4">
 
-          {/* Seat Type */}
+              <div className="flex items-center gap-2">
 
-          <div className="flex items-center justify-between rounded-xl border p-4">
+                <Person className="text-[#1A1D7E]" />
 
-            <div className="flex items-center gap-2">
+                Seat Type
 
-              <Person className="text-[#1A1D7E]" />
+              </div>
 
-              Seat Type
+              <span>{ticket.seatType || "N/A"}</span>
 
             </div>
 
-            <span className="font-semibold">
-              {ticket.seatType}
-            </span>
+            {/* Departure */}
 
-          </div>
+            <div className="flex items-center justify-between rounded-xl border p-4">
 
-          {/* Departure */}
+              <div className="flex items-center gap-2">
 
-          <div className="flex items-center justify-between rounded-xl border p-4">
+                <Calendar className="text-[#1A1D7E]" />
 
-            <div className="flex items-center gap-2">
+                Departure
 
-              <Calendar className="text-[#1A1D7E]" />
+              </div>
 
-              Departure
-
-            </div>
-
-            <span className="text-sm font-medium">
-              {new Date(ticket.departure).toLocaleDateString()}
-            </span>
-
-          </div>
-
-          {/* Duration */}
-
-          <div className="flex items-center justify-between rounded-xl border p-4">
-
-            <div className="flex items-center gap-2">
-
-              <Clock className="text-[#1A1D7E]" />
-
-              Duration
+              <span>
+                {new Date(ticket.departure).toLocaleDateString()}
+              </span>
 
             </div>
 
-            <span className="font-semibold">
-              {ticket.duration}
-            </span>
+            {/* Duration */}
 
-          </div>
+            <div className="flex items-center justify-between rounded-xl border p-4">
 
-          {/* Status */}
+              <div className="flex items-center gap-2">
 
-          <div
-            className={`rounded-xl p-4 text-center font-semibold ${bookingDisabled
+                <Clock className="text-[#1A1D7E]" />
+
+                Duration
+
+              </div>
+
+              <span>
+                {ticket.duration ? ticket.duration : "N/A"}
+              </span>
+
+            </div>
+
+            {/* Status */}
+
+            <div
+              className={`rounded-xl p-4 text-center font-semibold ${bookingDisabled
                 ? "bg-red-100 text-red-600"
                 : "bg-green-100 text-green-700"
-              }`}
-          >
-            {statusText}
+                }`}
+            >
+              {statusText}
+            </div>
+            <BookingModal bookingDisabled={bookingDisabled} ticket={ticket} />
+            <p className="text-center text-xs text-slate-400">
+              Secure booking • Instant confirmation
+            </p>
           </div>
-
-          {/* Notice */}
-
-          {isExpired && (
-            <div className="rounded-xl bg-yellow-50 p-4 text-sm text-yellow-700">
-              This ticket can no longer be booked because the departure
-              time has already passed.
-            </div>
-          )}
-
-          {noSeat && (
-            <div className="rounded-xl bg-red-50 p-4 text-sm text-red-600">
-              No seats are currently available for this ticket.
-            </div>
-          )}
-
-          {/* Button */}
-
-          <Button
-            fullWidth
-            size="lg"
-            isDisabled={bookingDisabled}
-            className="bg-gradient-to-r from-[#1A1D7E] via-[#0D2284] to-[#183F98] font-semibold text-white"
-          >
-            Book Now
-
-            <ArrowRight className="ml-2" />
-
-          </Button>
-
-          <p className="text-center text-xs text-slate-400">
-            Secure booking • Instant confirmation • Safe payment
-          </p>
-
         </div>
+      </aside>
 
-      </div>
-
-    </aside>
+    </>
   );
 }

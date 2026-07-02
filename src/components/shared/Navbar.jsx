@@ -146,7 +146,7 @@ const Navbar = () => {
                 <Link href="/auth/signin" className="block py-2 text-white bg-[#1A1D7E] px-3 whitespace-nowrap text-sm rounded-full no-underline">
                   Sign In
                 </Link>
-                <Link href="/auth/signup" className="w-full border-2 px-2 py-1 rounded-full border-[#1A1D7E] bg-transparent text-[#1A1D7E] no-underline">Get started</Link>
+                <Link href="/auth/signup" className="w-full whitespace-nowrap border-2 px-2 py-1 rounded-full border-[#1A1D7E] bg-transparent text-[#1A1D7E] no-underline">Get started</Link>
               </>
           }
         </div>

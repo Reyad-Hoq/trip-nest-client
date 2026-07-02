@@ -169,7 +169,7 @@ export default async function TicketDetailsPage({ params }) {
                 </div>
 
                 <p>
-                  {ticket.duration}
+                  {ticket.duration ? ticket.duration : "N/A"}
                 </p>
 
               </div>
