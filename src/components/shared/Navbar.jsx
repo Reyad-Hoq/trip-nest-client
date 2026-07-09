@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from "react";
-import { Link, Button, Skeleton } from "@heroui/react";
+import { Link, Button, Skeleton, Avatar } from "@heroui/react";
 import { Ticket } from '@gravity-ui/icons';
 import { signOut, useSession } from "@/lib/auth-client";
 import { motion } from "motion/react"
@@ -10,7 +10,8 @@ import { MdSpaceDashboard } from "react-icons/md";
 import { redirect, usePathname } from "next/navigation";
 import Image from "next/image";
 import { ProfileDropdown } from "./ProfileDropdown";
-import { div } from "motion/react-client";
+import { getUserProfilePhoto } from "@/lib/actions/UserProfile/userAvatar";
+import { getAvatarColor } from "@/lib/actions/UserProfile/avatarColor";
 
 const Navbar = () => {
 
@@ -131,15 +132,20 @@ const Navbar = () => {
               </div>
             ) :
               user ? <>
-                <div className="flex items-center gap-1">
-
-                  {<Image
-                    src={user?.image?.trim() ? user.image : "/boy.png"}
+                <div className="flex items-center gap-0">
+                  {user?.image ? <Image
+                    src={user?.image}
                     width={42}
                     height={42}
                     alt="avatar"
                     className="rounded-full"
-                  />}
+                  /> : <div
+                    className={`w-9 h-9 rounded-full flex items-center justify-center text-white font-semibold select-none ${getAvatarColor(
+                      user?.name
+                    )}`}
+                  >
+                    {getUserProfilePhoto(user?.name)}
+                  </div>}
                   <ProfileDropdown />
                 </div>
               </> : <>

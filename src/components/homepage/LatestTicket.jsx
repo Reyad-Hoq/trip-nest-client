@@ -1,5 +1,5 @@
 
-import { getTickets } from "@/lib/actions/tickets";
+import { getLatestTickets, getTickets } from "@/lib/actions/tickets";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -18,7 +18,7 @@ const transportIcon = {
 };
 
 export default async function LatestTickets() {
-  const tickets = await getTickets();
+  const tickets = await getLatestTickets();
   return (
     <section className="bg-white py-20">
       <div className="mx-auto max-w-6xl px-5">
@@ -60,7 +60,7 @@ export default async function LatestTickets() {
           {tickets.slice(0, 6).map((ticket) => (
 
             <div
-              key={ticket.id}
+              key={ticket._id}
               className="group overflow-hidden rounded-3xl border border-slate-200 bg-white shadow transition duration-300 hover:-translate-y-2 hover:shadow-xl"
             >
 
@@ -145,7 +145,7 @@ export default async function LatestTickets() {
                 </div>
 
                 <Link
-                  href={`/tickets/${ticket.id}`}
+                  href={`/tickets/${ticket._id}`}
                   className="flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[#1A1D7E] via-[#0D2284] to-[#183F98] px-5 py-3 font-semibold text-white transition hover:opacity-90 no-underline"
                 >
                   See Details

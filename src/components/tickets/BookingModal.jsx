@@ -12,17 +12,33 @@ import {
 } from "@heroui/react";
 
 import toast from "react-hot-toast";
-import { ArrowRight, Envelope, Ticket } from "@gravity-ui/icons";
+import { ArrowRight, Ticket } from "@gravity-ui/icons";
+import { useSession } from "@/lib/auth-client";
 
 export default function BookingModal({
   ticket, bookingDisabled
 }) {
-  const [quantity, setQuantity] = useState(1);
+  const { data: session, isPending } = useSession()
+
+  const user = session?.user;
 
   const [loading, setLoading] = useState(false);
 
-  const handleBooking = async () => {
+  const handleBooking = async (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+    const booking = Object.fromEntries(formData.entries());
+    console.log("Booking data:", booking);
+    const quantity = parseInt(booking.ticketQuantity, 10);
+    const bookingData = {
+      ticketId: ticket._id,
+      ticketQuantity: quantity,
 
+      userId: user?.id,
+      userName: user?.name,
+      userEmail: user?.email,
+    };
+    console.log("Booking data:", bookingData);
     if (quantity <= 0) {
       return toast.error("Quantity must be at least 1");
     }
@@ -43,10 +59,7 @@ export default function BookingModal({
             "Content-Type": "application/json",
           },
 
-          body: JSON.stringify({
-            ticketId: ticket.id,
-            quantity,
-          }),
+          body: JSON.stringify(bookingData),
         }
       );
 
@@ -92,20 +105,22 @@ export default function BookingModal({
             </Modal.Header>
             <Modal.Body className="p-6">
               <Surface variant="default">
-                <form className="flex flex-col gap-4">
-                  <TextField className="w-full" name="ticketQuantity" type="number" variant="secondary">
+                <form onSubmit={handleBooking} className="flex flex-col gap-4">
+                  <TextField className="w-full" name="ticketQuantity" type="number" variant="secondary" min={1} isRequired max={ticket.availableSeats} >
                     <Label>Ticket Quantity</Label>
                     <Input placeholder="Book ticket seats number" />
                   </TextField>
+                  <Modal.Footer>
+                    <Button slot="close" variant="secondary">
+                      Cancel
+                    </Button>
+                    <Button type="submit" isLoading={loading}>
+                      Confirm
+                    </Button>
+                  </Modal.Footer>
                 </form>
               </Surface>
             </Modal.Body>
-            <Modal.Footer>
-              <Button slot="close" variant="secondary">
-                Cancel
-              </Button>
-              <Button slot="close">Send Message</Button>
-            </Modal.Footer>
           </Modal.Dialog>
         </Modal.Container>
       </Modal.Backdrop>

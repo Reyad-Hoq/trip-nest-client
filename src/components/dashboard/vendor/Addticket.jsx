@@ -27,6 +27,7 @@ import {
 } from "@gravity-ui/icons";
 
 import { useSession } from "@/lib/auth-client";
+import Image from "next/image";
 
 export default function AddTicketPage() {
   const { data: session } = useSession();
@@ -38,6 +39,15 @@ export default function AddTicketPage() {
   const [imageUploading, setImageUploading] = useState(false);
   const [success, setSuccess] = useState("");
   const [error, setError] = useState("");
+
+  const calculateDuration = (departure, arrival) => {
+    const dep = new Date(departure);
+    const arr = new Date(arrival);
+    const diffInSeconds = Math.floor((arr - dep) / 1000);
+    const hours = Math.floor(diffInSeconds / 3600);
+    const minutes = Math.floor((diffInSeconds % 3600) / 60);
+    return `${hours}h ${minutes}m`;
+  };
 
   const handleImageUpload = async (e) => {
     const file = e.target.files?.[0];
@@ -88,6 +98,7 @@ export default function AddTicketPage() {
       ticket.image = imageUrl;
       ticket.perks = selected;
       ticket.status = "available"
+      ticket.duration = calculateDuration(ticket.departure, ticket.arrival);
       console.log(ticket);
 
       // Part-2 এ backend request হবে
@@ -111,8 +122,8 @@ export default function AddTicketPage() {
     <section className="mx-auto max-w-4xl p-6">
       {/* Heading */}
       <div className="mb-8">
-        <span className="rounded-full bg-yellow-100 px-4 py-1 text-sm font-semibold text-yellow-700">
-          Vendor Panel
+        <span className="rounded-full bg-yellow-300 px-4 py-1 text-sm font-semibold text-yellow-700">
+          Add Ticket As {user?.name}
         </span>
 
         <h1 className="mt-4 text-4xl font-extrabold text-[#1A1D7E]">
@@ -202,48 +213,80 @@ export default function AddTicketPage() {
             </TextField>
           </div>
 
-          {/* Departure */}
-          <TextField isRequired name="departure">
-            <Label className="mb-2 flex items-center gap-2">
-              <Calendar className="size-4 text-[#1A1D7E]" />
-              Departure Date & Time
-            </Label>
-            <Input type="datetime-local" />
-            <FieldError />
-          </TextField>
+          <div className="grid gap-6 md:grid-cols-2">
+            {/* Departure */}
+            <TextField isRequired name="departure">
+              <Label className="mb-2 flex items-center gap-2">
+                <Calendar className="size-4 text-[#1A1D7E]" />
+                Departure Date & Time
+              </Label>
+              <Input type="datetime-local" />
+              <FieldError />
+            </TextField>
+            <TextField isRequired name="arrival">
+              <Label className="mb-2 flex items-center gap-2">
+                <Calendar className="size-4 text-[#1A1D7E]" />
+                Arrival Date & Time
+              </Label>
+              <Input type="datetime-local" />
+              <FieldError />
+            </TextField>
+          </div>
+          <div className="grid gap-6 md:grid-cols-2">
+            <div className="grid gap-6 md:grid-cols-1">
+              <TextField isRequired name="operator">
+                <Label className="mb-2">Operator</Label>
+                <Input placeholder="Enter operator name" />
+                <FieldError />
+              </TextField>
+              <TextField name="vendorName" value={user?.name || ""}>
+                <Label className="mb-2 flex items-center gap-2">
+                  <Person className="size-4 text-[#1A1D7E]" />
+                  Vendor Name
+                </Label>
+                <Input />
+              </TextField>
+              <TextField name="vendorEmail" value={user?.email || ""}>
+                <Label className="mb-2 flex items-center gap-2">
+                  <Envelope className="size-4 text-[#1A1D7E]" />
+                  Vendor Email
+                </Label>
+                <Input />
+              </TextField>
+            </div>
+            {/* Perks */}
+            <CheckboxGroup
+              className="min-w-[320px] ml-6"
+              name="perks"
+              value={selected}
+              onChange={setSelected}
+            >
+              <Label>Perks</Label>
 
-          {/* Perks */}
-          <CheckboxGroup
-            className="min-w-[320px]"
-            name="perks"
-            value={selected}
-            onChange={setSelected}
-          >
-            <Label>Perks</Label>
+              {[
+                ["water", "Water"],
+                ["wifi", "Wifi"],
+                ["lunch", "Lunch"],
+                ["usb-charging", "USB Charging"],
+                ["charging-port", "Charging Port"],
+                ["dinner", "Dinner"],
+                ["sleeper", "Sleeper"],
+              ].map(([value, label]) => (
+                <Checkbox key={value} value={value}>
+                  <Checkbox.Content>
+                    <Checkbox.Control>
+                      <Checkbox.Indicator />
+                    </Checkbox.Control>
+                    {label}
+                  </Checkbox.Content>
+                </Checkbox>
+              ))}
 
-            {[
-              ["water", "Water"],
-              ["wifi", "Wifi"],
-              ["lunch", "Lunch"],
-              ["usb-charging", "USB Charging"],
-              ["charging-port", "Charging Port"],
-              ["dinner", "Dinner"],
-              ["sleeper", "Sleeper"],
-            ].map(([value, label]) => (
-              <Checkbox key={value} value={value}>
-                <Checkbox.Content>
-                  <Checkbox.Control>
-                    <Checkbox.Indicator />
-                  </Checkbox.Control>
-                  {label}
-                </Checkbox.Content>
-              </Checkbox>
-            ))}
-
-            <Label className="my-4 text-sm text-muted">
-              Selected: {selected.join(", ") || "None"}
-            </Label>
-          </CheckboxGroup>
+              <Label className="my-4 text-sm text-muted">
+                Selected: {selected.join(", ") || "None"}
+              </Label>
+            </CheckboxGroup>
+          </div>
 
           {/* Image Upload */}
           <div>
@@ -259,10 +302,12 @@ export default function AddTicketPage() {
             )}
 
             {imageUrl && (
-              <img
+              <Image
                 src={imageUrl}
                 alt="preview"
                 className="mt-4 h-40 w-full rounded-xl object-cover"
+                width={400}
+                height={160}
               />
             )}
 
@@ -272,21 +317,7 @@ export default function AddTicketPage() {
 
           {/* Vendor */}
           <div className="grid gap-6 md:grid-cols-2">
-            <TextField name="vendorName" value={user?.name || ""}>
-              <Label className="mb-2 flex items-center gap-2">
-                <Person className="size-4 text-[#1A1D7E]" />
-                Vendor Name
-              </Label>
-              <Input />
-            </TextField>
 
-            <TextField name="vendorEmail" value={user?.email || ""}>
-              <Label className="mb-2 flex items-center gap-2">
-                <Envelope className="size-4 text-[#1A1D7E]" />
-                Vendor Email
-              </Label>
-              <Input />
-            </TextField>
           </div>
 
           {/* Success */}
