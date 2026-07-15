@@ -1,4 +1,3 @@
-"use client";
 
 import Image from "next/image";
 import Link from "next/link";
@@ -12,6 +11,9 @@ import {
 } from "@gravity-ui/icons";
 import { useSession } from "@/lib/auth-client";
 import { getBookings } from "@/lib/actions/api/bookings";
+import { auth } from "@/lib/auth";
+import { getSession } from "@/lib/actions/session";
+import Countdown from "@/components/tickets/Countdown";
 
 const statusColor = {
   Pending: "bg-yellow-100 text-yellow-700",
@@ -20,13 +22,15 @@ const statusColor = {
   Paid: "bg-blue-100 text-blue-700",
 };
 
-export default function MyBookedTickets() {
-  const { data: session } = useSession();
-  if (!session) {
+export default async function MyBookedTickets() {
+  const user = await getSession();
+
+  if (!user) {
     return <p>Loading...</p>;
   }
-  const userId = session?.user?.id;
-  const bookings = getBookings(userId);
+
+  const userId = user?.id;
+  const bookings = await getBookings(userId);
 
   return (
     <section className="space-y-8">
@@ -150,10 +154,8 @@ export default function MyBookedTickets() {
 
                       <div className="flex items-center gap-2 font-medium text-blue-700">
 
-                        <Clock />
-
-                        <span>
-                          Countdown Component Here
+                        <Clock className="w-16 h-16" />
+                        <span> <Countdown departure={booking.departure} />
                         </span>
 
                       </div>

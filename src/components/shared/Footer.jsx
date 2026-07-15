@@ -23,6 +23,7 @@ import {
 import {
   HiArrowRight,
 } from "react-icons/hi2";
+import Image from "next/image";
 
 const quickLinks = [
   {
@@ -213,34 +214,25 @@ export default function Footer() {
 
               <div className="rounded w-12 h-10 bg-white flex justify-center items-center shadow">
 
-                {/* <FaStripe
-                  size={42}
-                  className="text-indigo-600"
-                /> */}
-                <img src="/stripe.svg" />
+
+                <Image src="/stripe.svg" alt="stripe-payment" width={40} height={40} />
               </div>
 
               <div className="rounded w-12 h-10 bg-white flex justify-center items-center shadow">
 
-                {/* <FaCcVisa
-                  size={42}
-                  className="text-blue-700"
-                /> */}
-                <img src="/visa.svg" />
+
+                <Image src="/visa.svg" alt="visa-payment" width={40} height={40} />
               </div>
 
               <div className="rounded w-12 h-10 bg-white flex justify-center items-center shadow">
 
-                {/* <FaCcMastercard
-                  size={42}
-                  className="text-red-500"
-                /> */}
-                <img src="/Mastercard.svg" />
+
+                <Image src="/mastercard.svg" alt="mastercard-payment" width={40} height={40} />
               </div>
 
               <div className="rounded w-12 h-10 bg-white flex justify-center items-center shadow">
 
-                <img src="/amex.svg" />
+                <Image src="/amex.svg" alt="amex" width={40} height={40} />
 
               </div>
 

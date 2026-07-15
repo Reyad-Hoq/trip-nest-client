@@ -10,7 +10,7 @@ const DashboardLayout = async ({ children }) => {
   }
 
   return (
-    <div className="flex min-h-screen">
+    <div className="flex flex-col lg:flex-row min-h-screen">
       <DashboardSidebar user={user} />
       <div className="flex-1">
         {children}

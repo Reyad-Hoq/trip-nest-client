@@ -2,11 +2,14 @@
 export const getBookings = async (userId) => {
   try {
     const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/bookings?userId=${userId}`);
+    console.log("API Response Status:", res.status); // Log the response status to verify the request was successful
     if (!res.ok) {
       throw new Error("Failed to fetch bookings");
     }
     const data = await res.json();
-    return data.bookings;
+    console.log("API Response:", data);
+
+    return data;
   }
   catch (error) {
     console.error("Error fetching bookings:", error);
