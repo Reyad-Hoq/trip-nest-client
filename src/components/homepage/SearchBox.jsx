@@ -7,6 +7,7 @@ import {
   Button,
   Label,
   ListBox,
+  InputGroup,
 } from "@heroui/react";
 
 import {
@@ -26,10 +27,10 @@ export default function SearchBox() {
   return (
     <Card className="relative rounded-3xl bg-white/90 backdrop-blur-xl shadow-2xl p-6 pb-12">
       <div className="grid gap-5 lg:grid-cols-4">
+
         <Input
           label="From"
           placeholder="Dhaka"
-          startcontent={<FaLocationDot />}
         />
 
         <Input
@@ -38,48 +39,39 @@ export default function SearchBox() {
           startcontent={<FaLocationDot />}
         />
 
-      
-          {/* <Select className="w-full rounded-xl border border-default-300 bg-background px-4 py-3 outline-none focus:border-primary">
+
+        {/* <Select className="w-full rounded-xl border border-default-300 bg-background px-4 py-3 outline-none focus:border-primary">
             <option>Bus</option>
             <option>Train</option>
             <option>Flight</option>
             <option>Launch</option>
           </Select> */}
-          <Select className="w-[256px]" placeholder="Select one">
-            <Label>Transport</Label>
-            <Select.Trigger>
-              <Select.Value />
-              <Select.Indicator />
-            </Select.Trigger>
-            <Select.Popover>
-              <ListBox>
-                <ListBox.Item id="florida" textValue="Florida">
-                  Florida
-                  <ListBox.ItemIndicator />
-                </ListBox.Item>
-                <ListBox.Item id="delaware" textValue="Delaware">
-                  Delaware
-                  <ListBox.ItemIndicator />
-                </ListBox.Item>
-                <ListBox.Item id="california" textValue="California">
-                  California
-                  <ListBox.ItemIndicator />
-                </ListBox.Item>
-                <ListBox.Item id="texas" textValue="Texas">
-                  Texas
-                  <ListBox.ItemIndicator />
-                </ListBox.Item>
-                <ListBox.Item id="new-york" textValue="New York">
-                  New York
-                  <ListBox.ItemIndicator />
-                </ListBox.Item>
-                <ListBox.Item id="washington" textValue="Washington">
-                  Washington
-                  <ListBox.ItemIndicator />
-                </ListBox.Item>
-              </ListBox>
-            </Select.Popover>
-          </Select>
+        <Select className="w-full" placeholder="Transport">
+          <Select.Trigger>
+            <Select.Value />
+            <Select.Indicator />
+          </Select.Trigger>
+          <Select.Popover>
+            <ListBox>
+              <ListBox.Item id="bus" textValue="Bus">
+                Bus
+                <ListBox.ItemIndicator />
+              </ListBox.Item>
+              <ListBox.Item id="train" textValue="Train">
+                Train
+                <ListBox.ItemIndicator />
+              </ListBox.Item>
+              <ListBox.Item id="flight" textValue="Flight">
+                Flight
+                <ListBox.ItemIndicator />
+              </ListBox.Item>
+              <ListBox.Item id="launch" textValue="Launch">
+                Launch
+                <ListBox.ItemIndicator />
+              </ListBox.Item>
+            </ListBox>
+          </Select.Popover>
+        </Select>
 
         <Input
           type="date"

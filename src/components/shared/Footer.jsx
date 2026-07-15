@@ -215,24 +215,24 @@ export default function Footer() {
               <div className="rounded w-12 h-10 bg-white flex justify-center items-center shadow">
 
 
-                <Image src="/stripe.svg" alt="stripe-payment" width={40} height={40} />
+                <Image src="/Stripe.svg" alt="stripe-payment" width={40} height={40} />
               </div>
 
               <div className="rounded w-12 h-10 bg-white flex justify-center items-center shadow">
 
 
-                <Image src="/visa.svg" alt="visa-payment" width={40} height={40} />
+                <Image src="/Visa.svg" alt="visa-payment" width={40} height={40} />
               </div>
 
               <div className="rounded w-12 h-10 bg-white flex justify-center items-center shadow">
 
 
-                <Image src="/mastercard.svg" alt="mastercard-payment" width={40} height={40} />
+                <Image src="/Mastercard.svg" alt="mastercard-payment" width={40} height={40} />
               </div>
 
               <div className="rounded w-12 h-10 bg-white flex justify-center items-center shadow">
 
-                <Image src="/amex.svg" alt="amex" width={40} height={40} />
+                <Image src="/Amex.svg" alt="amex" width={40} height={40} />
 
               </div>
 
