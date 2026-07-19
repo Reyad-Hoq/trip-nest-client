@@ -5,89 +5,107 @@ import {
   Input,
   Select,
   Button,
-  Label,
   ListBox,
-  InputGroup,
+  Form,
+  TextField,
 } from "@heroui/react";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 import {
-  FaLocationDot,
-  FaBus,
   FaMagnifyingGlass,
 } from "react-icons/fa6";
 
-const transport = [
-  "Bus",
-  "Train",
-  "Flight",
-  "Launch",
-];
 
 export default function SearchBox() {
+  const router = useRouter();
+
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+
+    const formData = new FormData(e.currentTarget);
+
+    const form = Object.fromEntries(formData.entries())
+    console.log(form);
+    const { from, to, transport, date } = form;
+    const params = new URLSearchParams();
+    if (from) params.append("from", from);
+    if (to) params.append("to", to);
+    if (transport) params.append("transport", transport);
+    if (date) params.append("date", date);
+
+    router.push(
+      `/tickets?${params.toString()}`
+    );
+    console.log(params)
+  };
+
   return (
     <Card className="relative rounded-3xl bg-white/90 backdrop-blur-xl shadow-2xl p-6 pb-12">
-      <div className="grid gap-5 lg:grid-cols-4">
+      <Form onSubmit={handleSearch}>
+        <div className="grid gap-5 lg:grid-cols-4">
+          <TextField aria-label="from" name="from" type="text">
+            <Input
 
-        <Input
-          label="From"
-          placeholder="Dhaka"
-        />
+              placeholder="Dhaka"
+            />
+          </TextField>
 
-        <Input
-          label="To"
-          placeholder="Cox's Bazar"
-          startcontent={<FaLocationDot />}
-        />
+          <TextField aria-label="to" name="to" type="text">
+            <Input
 
+              placeholder="Cox's Bazar"
+            />
+          </TextField>
 
-        {/* <Select className="w-full rounded-xl border border-default-300 bg-background px-4 py-3 outline-none focus:border-primary">
-            <option>Bus</option>
-            <option>Train</option>
-            <option>Flight</option>
-            <option>Launch</option>
-          </Select> */}
-        <Select className="w-full" placeholder="Transport">
-          <Select.Trigger>
-            <Select.Value />
-            <Select.Indicator />
-          </Select.Trigger>
-          <Select.Popover>
-            <ListBox>
-              <ListBox.Item id="bus" textValue="Bus">
-                Bus
-                <ListBox.ItemIndicator />
-              </ListBox.Item>
-              <ListBox.Item id="train" textValue="Train">
-                Train
-                <ListBox.ItemIndicator />
-              </ListBox.Item>
-              <ListBox.Item id="flight" textValue="Flight">
-                Flight
-                <ListBox.ItemIndicator />
-              </ListBox.Item>
-              <ListBox.Item id="launch" textValue="Launch">
-                Launch
-                <ListBox.ItemIndicator />
-              </ListBox.Item>
-            </ListBox>
-          </Select.Popover>
-        </Select>
+          <Select aria-label="transport" name="transport" className="w-full" placeholder="Transport">
+            <Select.Trigger>
+              <Select.Value />
+              <Select.Indicator />
+            </Select.Trigger>
+            <Select.Popover>
+              <ListBox>
+                <ListBox.Item id="bus" textValue="Bus">
+                  Bus
+                  <ListBox.ItemIndicator />
+                </ListBox.Item>
+                <ListBox.Item id="train" textValue="Train">
+                  Train
+                  <ListBox.ItemIndicator />
+                </ListBox.Item>
+                <ListBox.Item id="flight" textValue="Flight">
+                  Flight
+                  <ListBox.ItemIndicator />
+                </ListBox.Item>
+                <ListBox.Item id="launch" textValue="Launch">
+                  Launch
+                  <ListBox.ItemIndicator />
+                </ListBox.Item>
+              </ListBox>
+            </Select.Popover>
+          </Select>
+          <TextField aria-label="date" name="date"
+            type="date">
+            <Input
+            />
+          </TextField>
 
-        <Input
-          type="date"
-          label="Journey Date"
-        />
-      </div>
+        </div>
 
-      {/* Center Floating Button */}
-      <Button
-        size="lg"
-        radius="full"
-        startContent={<FaMagnifyingGlass />}
-        className="absolute left-1/2 -bottom-6 -translate-x-1/2 bg-yellow-400 text-blue-900 font-bold px-10 shadow-xl"
-      >
-        Search
-      </Button>
+        {/* Center Floating Button */}
+        <Button
+          type="submit"
+          size="lg"
+          radius="full"
+          startContent={<FaMagnifyingGlass />}
+          className="absolute left-1/2 -bottom-6 -translate-x-1/2 bg-yellow-400 text-blue-900 font-bold px-10 shadow-xl"
+        >
+          Search
+        </Button>
+      </Form>
     </Card>
   );
-}
+};
+
+

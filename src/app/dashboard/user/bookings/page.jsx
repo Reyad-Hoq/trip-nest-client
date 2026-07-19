@@ -9,9 +9,7 @@ import {
   CreditCard,
   Ticket,
 } from "@gravity-ui/icons";
-import { useSession } from "@/lib/auth-client";
 import { getBookings } from "@/lib/actions/api/bookings";
-import { auth } from "@/lib/auth";
 import { getSession } from "@/lib/actions/session";
 import Countdown from "@/components/tickets/Countdown";
 
@@ -33,7 +31,7 @@ export default async function MyBookedTickets() {
   const bookings = await getBookings(userId);
 
   return (
-    <section className="space-y-8">
+    <section className="w-11/12 mx-auto space-y-8 my-8">
 
       <div>
         <h1 className="text-3xl font-bold text-[#1A1D7E]">
@@ -64,7 +62,7 @@ export default async function MyBookedTickets() {
           </Link>
         </div>
       ) : (
-        <div className="grid gap-7 md:grid-cols-2 xl:grid-cols-3">
+        <div className="grid gap-7 md:grid-cols-2 xl:grid-cols-">
 
           {bookings.map((booking) => {
 
@@ -103,11 +101,11 @@ export default async function MyBookedTickets() {
 
                   <div className="flex items-center justify-between text-sm">
 
-                    <span>{booking.from}</span>
+                    <span className="font-bold">{booking.from}</span>
 
-                    <ArrowRight />
+                    to
 
-                    <span>{booking.to}</span>
+                    <span className="font-bold">{booking.to}</span>
 
                   </div>
 
@@ -137,7 +135,7 @@ export default async function MyBookedTickets() {
 
                   {/* Departure */}
 
-                  <div className="flex items-center gap-2 text-sm">
+                  <div className="flex items-center gap-2 text-sm text-red-500">
 
                     <Calendar />
 

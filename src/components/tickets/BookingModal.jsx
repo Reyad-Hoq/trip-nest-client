@@ -114,7 +114,7 @@ export default function BookingModal({
                     <Button slot="close" variant="secondary">
                       Cancel
                     </Button>
-                    <Button type="submit" isLoading={loading}>
+                    <Button slot={"close"} type="submit" isLoading={loading}>
                       Confirm
                     </Button>
                   </Modal.Footer>

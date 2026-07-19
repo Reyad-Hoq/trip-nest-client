@@ -1,10 +1,9 @@
 'use client';
 
 import { useEffect, useState } from "react";
-import { Link, Button, Skeleton, Avatar } from "@heroui/react";
+import { Link, Button, Skeleton } from "@heroui/react";
 import { Ticket } from '@gravity-ui/icons';
 import { signOut, useSession } from "@/lib/auth-client";
-import { motion } from "motion/react"
 import { BsHouseFill, BsTrainFreightFront } from "react-icons/bs";
 import { MdSpaceDashboard } from "react-icons/md";
 import { redirect, usePathname } from "next/navigation";

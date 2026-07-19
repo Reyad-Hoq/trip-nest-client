@@ -21,7 +21,7 @@ export default async function LatestTickets() {
   const tickets = await getLatestTickets();
   return (
     <section className="bg-white py-20">
-      <div className="mx-auto max-w-6xl px-5">
+      <div className="mx-auto max-w-4xl px-5">
 
         {/* Heading */}
 
@@ -57,7 +57,7 @@ export default async function LatestTickets() {
 
         <div className="grid gap-8 md:grid-cols-2 xl:grid-cols-3">
 
-          {tickets.slice(0, 6).map((ticket) => (
+          {tickets.map((ticket) => (
 
             <div
               key={ticket._id}

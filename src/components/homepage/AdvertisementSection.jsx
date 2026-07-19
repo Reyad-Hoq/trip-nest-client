@@ -1,5 +1,5 @@
 
-import { getTickets } from "@/lib/actions/tickets";
+import { getTickets } from "@/lib/actions/api/ticket";
 import Image from "next/image";
 import Link from "next/link";
 import { FaArrowRight, FaBus, FaTrain, FaPlane, FaShip } from "react-icons/fa6";
@@ -15,7 +15,7 @@ export default async function AdvertisementSection() {
   const tickets = await getTickets();
   return (
     <section className="py-20 bg-slate-50">
-      <div className="mx-auto max-w-5xl px-5">
+      <div className="mx-auto max-w-4xl px-5">
 
         {/* Heading */}
 
@@ -42,7 +42,7 @@ export default async function AdvertisementSection() {
           {tickets.slice(0, 6).map((ticket) => (
 
             <div
-              key={ticket.id}
+              key={ticket._id}
               className="group overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-md transition duration-300 hover:-translate-y-2 hover:shadow-2xl"
             >
 

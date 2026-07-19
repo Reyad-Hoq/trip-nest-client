@@ -91,17 +91,17 @@ const DashboardSidebar = ({ user }) => {
   </nav>
   return (
     <div className='py-2 px-1'>
-      <aside className='hidden lg:block w-64 border-r border-default p-4 shrink-0 min-h-screen bg-white'>
+      <aside className='hidden lg:block w-64 border-r border-default h-full p-4 shrink-0 min-h-screen bg-white'>
         {navContent}
       </aside>
       <Drawer>
-        <Button className="lg:hidden bg-blue-800 text-white w-full" variant="solid">
+        <Button className="lg:hidden bg-blue-900 text-white rounded-xl w-full">
           <LayoutSideContentLeft />
           Dashboard Menu
         </Button>
         <Drawer.Backdrop>
           <Drawer.Content placement="left" className="w-70 max-w-[85vw]">
-            <Drawer.Dialog className="h-full">
+            <Drawer.Dialog className="h-1/3 w-full">
               <Drawer.CloseTrigger />
               <Drawer.Header>
                 <Drawer.Heading>Dashboard</Drawer.Heading>

@@ -1,5 +1,5 @@
 
-import { getTickets } from "@/lib/actions/tickets";
+import { getTickets } from "@/lib/actions/api/ticket";
 import Image from "next/image";
 import Link from "next/link";
 import { FaArrowRight, FaBus, FaTrain, FaPlane, FaShip } from "react-icons/fa6";
@@ -11,8 +11,11 @@ const transportIcon = {
   Launch: <FaShip className="text-indigo-600" />,
 };
 
-export default async function TicketsPage() {
-  const tickets = await getTickets();
+export default async function TicketsPage({ searchParams }) {
+  const params = await searchParams;
+  console.log(params)
+  const tickets = await getTickets(params);
+  console.log(tickets)
   return (
     <section className="py-20 bg-slate-50">
       <div className="mx-auto max-w-5xl px-5">

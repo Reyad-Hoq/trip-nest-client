@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 
 export default function Countdown({ departure }) {
+
   const calculateTimeLeft = () => {
     const difference = new Date(departure) - new Date();
 
@@ -32,11 +33,11 @@ export default function Countdown({ departure }) {
     }, 1000);
 
     return () => clearInterval(timer);
-  }, []);
+  });
 
   if (!timeLeft) {
     return (
-      <div className="rounded-2xl bg-red-500/70 p-6 text-center">
+      <div className="rounded-2xl bg-red-600/70 p-6 text-center shadow-2xl">
         <h2 className="text-2xl font-bold text-white">
           Departure Closed
         </h2>
@@ -49,19 +50,19 @@ export default function Countdown({ departure }) {
 
   const items = [
     {
-      label: "Days",
+      label: "Day",
       value: timeLeft.days,
     },
     {
-      label: "Hours",
+      label: "Hour",
       value: timeLeft.hours,
     },
     {
-      label: "Minutes",
+      label: "Min",
       value: timeLeft.minutes,
     },
     {
-      label: "Seconds",
+      label: "Sec",
       value: timeLeft.seconds,
     },
   ];
@@ -73,11 +74,11 @@ export default function Countdown({ departure }) {
           key={item.label}
           className="rounded-2xl bg-white/10 p-6 text-center backdrop-blur"
         >
-          <h3 className="text-4xl font-extrabold">
+          <h3 className="text-xl font-extrabold">
             {String(item.value).padStart(2, "0")}
           </h3>
 
-          <p className="mt-2 text-sm uppercase tracking-wider text-white/80">
+          <p className="mt-2 text-sm uppercase text-blue/90">
             {item.label}
           </p>
         </div>

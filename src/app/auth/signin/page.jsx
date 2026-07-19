@@ -60,10 +60,8 @@ const LoginPage = () => {
     if (data) {
       setSuccessMessage("Login successful. Redirecting...");
 
-      setTimeout(() => {
-        router.refresh();
-        router.replace("/");
-      }, 1200);
+      router.push("/");
+      router.refresh();
     }
   };
 

@@ -3,15 +3,19 @@
 import { signOut, useSession } from "@/lib/auth-client";
 import { ChevronDownWide, ChevronUpWide } from "@gravity-ui/icons";
 import { Button, Dropdown, Label } from "@heroui/react";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 export function ProfileDropdown() {
   const [isDropDown, setIsDropDown] = useState(false);
+  const router = useRouter();
   const { data: session, isPending } = useSession()
 
   const user = session?.user;
   const handleSignOut = async () => {
     await signOut();
+    router.refresh();
+    router.replace("/");
   }
   return (
     <Dropdown onOpenChange={setIsDropDown}>
