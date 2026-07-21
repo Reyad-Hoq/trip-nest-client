@@ -2,7 +2,6 @@
 import React from 'react';
 import {
   Avatar,
-  Badge,
   Card,
 } from "@heroui/react";
 

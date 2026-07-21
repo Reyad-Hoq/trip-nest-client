@@ -131,7 +131,7 @@ export default async function AdvertisementSection() {
 
                 <Link
                   href={`/tickets/${ticket._id}`}
-                  className="flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[#1A1D7E] via-[#0D2284] to-[#183F98] px-5 py-3 font-semibold text-white transition hover:opacity-90"
+                  className="flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[#1A1D7E] via-[#0D2284] to-[#183F98] px-5 py-3 font-semibold transition hover:opacity-90 text-yellow-400"
                 >
                   See Details
                   <FaArrowRight />

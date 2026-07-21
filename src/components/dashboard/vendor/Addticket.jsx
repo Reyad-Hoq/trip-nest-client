@@ -30,8 +30,10 @@ import { useSession } from "@/lib/auth-client";
 import Image from "next/image";
 
 export default function AddTicketPage() {
+
   const { data: session } = useSession();
   const user = session?.user;
+
 
   const [selected, setSelected] = useState(["water"]);
   const [loading, setLoading] = useState(false);
@@ -94,10 +96,9 @@ export default function AddTicketPage() {
       const formData = new FormData(e.currentTarget);
       const ticket = Object.fromEntries(formData.entries());
 
-
+      ticket.vendorId = user.id;
       ticket.image = imageUrl;
       ticket.perks = selected;
-      ticket.status = "available"
       ticket.duration = calculateDuration(ticket.departure, ticket.arrival);
       console.log(ticket);
 

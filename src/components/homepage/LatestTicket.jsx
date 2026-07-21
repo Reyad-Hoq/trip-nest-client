@@ -146,7 +146,7 @@ export default async function LatestTickets() {
 
                 <Link
                   href={`/tickets/${ticket._id}`}
-                  className="flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[#1A1D7E] via-[#0D2284] to-[#183F98] px-5 py-3 font-semibold text-white transition hover:opacity-90 no-underline"
+                  className="flex items-center justify-center gap-2 rounded-xl bg-yellow-500 text-blue-800 px-5 py-3 font-semibold transition hover:opacity-90 no-underline"
                 >
                   See Details
                   <FaArrowRight />

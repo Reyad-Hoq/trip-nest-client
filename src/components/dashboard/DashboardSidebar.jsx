@@ -8,7 +8,10 @@ import {
   LayoutSideContentLeft,
   SquarePlus,
   ListUl,
-  ChartColumn
+  ChartColumn,
+  FileArrowRightOut,
+  PersonPencil,
+  LayoutHeaderCursor
 } from "@gravity-ui/icons";
 import { Button, Drawer } from "@heroui/react";
 import { getSession } from '@/lib/actions/session';
@@ -62,9 +65,32 @@ const DashboardSidebar = ({ user }) => {
       href: "/dashboard/vendor/revenue",
     },
   ];
+  const adminNavLinks = [
+    {
+      icon: Person,
+      label: "Profile",
+      href: "/dashboard/admin/profile"
+    },
+    {
+      icon: FileArrowRightOut,
+      label: "Manage Tickets",
+      href: "/dashboard/admin/manage-tickets"
+    },
+    {
+      icon: PersonPencil,
+      label: "Manage Users",
+      href: "/dashboard/admin/manage-users"
+    },
+    {
+      icon: LayoutHeaderCursor,
+      label: "Advertise Tickets",
+      href: "/dashboard/admin/advertise-tickets"
+    },
+  ]
   const navLinksMap = {
     user: userNavLinks,
     vendor: vendorNavLinks,
+    admin: adminNavLinks,
   }
   if (!user) {
     redirect("/auth/signin");
