@@ -127,7 +127,7 @@ const DashboardSidebar = ({ user }) => {
         </Button>
         <Drawer.Backdrop>
           <Drawer.Content placement="left" className="w-70 max-w-[85vw]">
-            <Drawer.Dialog className="h-1/3 w-full">
+            <Drawer.Dialog className="h-full w-full">
               <Drawer.CloseTrigger />
               <Drawer.Header>
                 <Drawer.Heading>Dashboard</Drawer.Heading>

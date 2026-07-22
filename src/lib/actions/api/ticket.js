@@ -13,7 +13,6 @@ export const getTicketById = async (ticketId) => {
 }
 
 export const getTickets = async (params = {}) => {
-  console.log("PARAMS:", params);
 
   const query = new URLSearchParams();
 
@@ -23,11 +22,7 @@ export const getTickets = async (params = {}) => {
     }
   });
 
-  console.log("QUERY:", query.toString());
-
   const url = `${baseUrl}/api/tickets?${query.toString()}`;
-
-  console.log("FETCH URL:", url);
 
   const res = await fetch(url, {
     cache: "no-store",
