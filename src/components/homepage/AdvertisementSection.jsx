@@ -12,7 +12,7 @@ const transportIcon = {
 };
 
 export default async function AdvertisementSection() {
-  const tickets = await getTickets();
+  const tickets = await getTickets({ featured: "true" });
   return (
     <section className="py-20 bg-slate-50">
       <div className="mx-auto max-w-4xl px-5">

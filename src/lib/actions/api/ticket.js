@@ -12,21 +12,46 @@ export const getTicketById = async (ticketId) => {
   return ticket;
 }
 
-export const getTickets = async (params = {}) => {
+// export const getTickets = async (params = {}) => {
 
+//   const query = new URLSearchParams();
+
+//   Object.entries(params).forEach(([key, value]) => {
+//     if (value) {
+//       query.append(key, value);
+//     }
+//   });
+
+//   const url = `${baseUrl}/api/tickets?${query.toString()}`;
+
+//   const res = await fetch(url, {
+//     cache: "no-store",
+//   });
+
+//   return res.json();
+// };
+export const getTickets = async (params = {}) => {
   const query = new URLSearchParams();
 
   Object.entries(params).forEach(([key, value]) => {
-    if (value) {
+    
+    if (value === null || value === undefined || value === "") return;
+
+   
+    if (Array.isArray(value)) {
+      value.forEach((v) => query.append(key, v));
+    } else {
       query.append(key, value);
     }
   });
 
   const url = `${baseUrl}/api/tickets?${query.toString()}`;
 
-  const res = await fetch(url, {
-    cache: "no-store",
-  });
+  const res = await fetch(url, { cache: "no-store" });
+
+  if (!res.ok) {
+    throw new Error(`Failed to fetch tickets: ${res.status}`);
+  }
 
   return res.json();
 };
