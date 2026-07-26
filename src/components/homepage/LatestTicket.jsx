@@ -69,7 +69,7 @@ export default async function LatestTickets() {
               <div className="relative h-52 overflow-hidden">
 
                 <Image
-                  src={ticket.image}
+                  src={ticket.image || '/placeholder.svg'}
                   alt={ticket.title}
                   fill
                   className="object-cover transition duration-500 group-hover:scale-110"

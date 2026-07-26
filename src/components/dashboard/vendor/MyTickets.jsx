@@ -19,13 +19,13 @@ const transportIcon = {
 export default function AddedTickets({ tickets }) {
   if (!tickets.length) {
     return (
-      <div className="rounded-3xl border border-dashed py-20 text-center">
+      <section className="w-full max-w-3xl mx-auto rounded-3xl border border-dashed py-20 m-2 text-center">
         <h2 className="text-2xl font-bold text-slate-700">
           No Tickets Added
         </h2>
 
         <p className="mt-2 text-slate-500">
-          You haven't added any tickets yet.
+          You haven&lsquo;t added any tickets yet.
         </p>
 
         <Link
@@ -34,7 +34,7 @@ export default function AddedTickets({ tickets }) {
         >
           Add Ticket
         </Link>
-      </div>
+      </section>
     );
   }
 
@@ -48,7 +48,7 @@ export default function AddedTickets({ tickets }) {
           </h1>
 
           <p className="text-slate-500">
-            Manage all tickets you've created.
+            Manage all tickets you&lsquo;ve created.
           </p>
         </div>
 
@@ -71,7 +71,7 @@ export default function AddedTickets({ tickets }) {
 
             <div className="relative h-52">
               <Image
-                src={ticket.image}
+                src={ticket.image || '/placeholder.svg'}
                 alt={ticket.title}
                 fill
                 className="object-cover"

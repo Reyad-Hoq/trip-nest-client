@@ -2,7 +2,7 @@ import React from 'react';
 
 const DashboardLoading = () => {
   return (
-    <div>
+    <div className=' flex items-center'>
       Loading Dashboard...
     </div>
   );

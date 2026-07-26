@@ -49,7 +49,7 @@ export default async function TicketsPage({ searchParams }) {
               <div className="relative h-56 overflow-hidden">
 
                 <Image
-                  src={ticket.image}
+                  src={ticket.image || '/placeholder.svg'}
                   alt={ticket.title}
                   sizes="(max-width: 512px) 100vw, auto"
                   fill
