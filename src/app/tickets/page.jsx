@@ -15,7 +15,7 @@ export default async function TicketsPage({ searchParams }) {
   const params = await searchParams;
   console.log(params)
   const tickets = await getTickets(params);
-  console.log(tickets)
+
   return (
     <section className="py-20 bg-slate-50">
       <div className="mx-auto max-w-5xl px-5">

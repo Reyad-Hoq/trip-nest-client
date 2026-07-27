@@ -14,3 +14,22 @@ export const getUsers = async () => {
     throw error;
   }
 }
+
+export const updateUserById = async (userId, data) => {
+  console.log(userId);
+  console.log(data);
+  const res = await fetch(`${baseUrl}/api/users/${userId}`, {
+    method: 'PATCH',
+    headers: {
+      'content-type': 'application/json',
+    },
+    body: JSON.stringify(data),
+  });
+  console.log(res.body)
+  if (!res.ok) {
+    throw new Error('Failed to update ticket');
+  }
+  const user = await res.json();
+  console.log(user)
+  return user;
+}

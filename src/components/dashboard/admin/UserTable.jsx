@@ -2,10 +2,46 @@
 
 import React from 'react';
 import { Button, Chip, Table } from '@heroui/react';
+import { updateUserById } from '@/lib/actions/api/users';
+import toast from 'react-hot-toast';
+import { useRouter } from 'next/navigation';
 
 const UserTable = ({ users }) => {
-  const handleRoleUpdate = async () => {
-    alert('pressed role change button')
+  const router = useRouter();
+  const handleRoleUpdate = async (userId, role, userName) => {
+    console.log(userId, role)
+    try {
+      const result = await updateUserById(userId,
+        { role });
+      if (result.modifiedCount > 0) {
+        toast.success(`This "${userName}" Role Changed To ${role}`);
+        router.refresh();
+      } else {
+        toast.error('Something went wrong')
+        router.refresh();
+      }
+      console.log(result)
+
+    } catch (err) {
+      toast.error(err.message);
+    }
+  }
+  const handleStatusUpdate = async (userId, status, userName) => {
+    try {
+      const result = await updateUserById(userId,
+        { status });
+      if (result.modifiedCount > 0) {
+        toast.success(`This ${userName} marked as FRAUD`);
+        router.refresh();
+      } else {
+        toast.error('Something went wrong')
+        router.refresh();
+      }
+      console.log(result)
+
+    } catch (err) {
+      toast.error(err.message);
+    }
   }
   return (
     <Table>
@@ -59,17 +95,21 @@ const UserTable = ({ users }) => {
                     user.role === 'user' ?
                       <div className="flex items-center gap-1">
                         <Button onPress={() => {
-                          handleRoleUpdate()
+                          handleRoleUpdate(user?._id, 'admin', user?.name)
                         }} className='
                       text-[16px]' variant='secondary' size="sm">
                           Admin
                         </Button>
-                        <Button className='
+                        <Button onPress={() => {
+                          handleRoleUpdate(user?._id, 'vendor', user?.name)
+                        }} className='
                       text-[16px]' size="sm" variant="secondary">
                           Vendor
                         </Button>
-                      </div> : <div className="flex items-center gap-1">
-                        <Button className='
+                      </div> : user?.status === 'blocked' ? <div className='text-center font-semibold text-red-600 rounded-2xl'>Marked as fraud</div> : < div className="flex items-center gap-1">
+                        <Button onPress={() => {
+                          handleStatusUpdate(user?._id, 'blocked', user?.name)
+                        }} className='
                       text-[16px]' size="sm" variant="danger-soft">
                           Fraud
                         </Button>
@@ -83,7 +123,7 @@ const UserTable = ({ users }) => {
           }
         </Table.Content>
       </Table.ResizableContainer>
-    </Table>
+    </Table >
   );
 };
 

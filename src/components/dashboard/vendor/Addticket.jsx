@@ -13,6 +13,7 @@ import {
   Checkbox,
   CheckboxGroup,
   ListBox,
+  Alert,
 } from "@heroui/react";
 
 import {
@@ -33,7 +34,6 @@ export default function AddTicketPage() {
 
   const { data: session } = useSession();
   const user = session?.user;
-
 
   const [selected, setSelected] = useState(["water"]);
   const [loading, setLoading] = useState(false);
@@ -109,16 +109,27 @@ export default function AddTicketPage() {
           'content-type': 'application/json',
         },
         body: JSON.stringify(ticket),
-      })
+      });
+
+      const data = await res.json();
+      if (!res.ok) {
+        throw new Error(data.message);
+      }
       setSuccess("Ticket added successfully!");
     } catch (err) {
       console.error(err);
-      setError("Something went wrong. Please try again.");
+      setError(err.message || "Something went wrong. Please try again.");
     } finally {
       setLoading(false);
     }
   };
-
+  if (user?.status === "blocked") {
+    return (
+      <Alert color="danger">
+        Your account has been blocked. You cannot add new tickets.
+      </Alert>
+    );
+  }
   return (
     <section className="mx-auto max-w-4xl p-6">
       {/* Heading */}
@@ -339,7 +350,7 @@ export default function AddTicketPage() {
           <Button
             type="submit"
             isLoading={loading}
-            isDisabled={loading || imageUploading}
+            isDisabled={loading || imageUploading || user?.status === 'blocked'}
             className="w-full rounded-xl bg-gradient-to-r from-[#1A1D7E] via-[#0D2284] to-[#183F98] py-7 text-base font-semibold text-white"
           >
             <SquarePlus className="mr-2 size-5" />
