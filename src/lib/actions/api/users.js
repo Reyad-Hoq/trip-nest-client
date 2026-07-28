@@ -27,7 +27,7 @@ export const updateUserById = async (userId, data) => {
   });
   console.log(res.body)
   if (!res.ok) {
-    throw new Error('Failed to update ticket');
+    throw new Error('Failed to update User');
   }
   const user = await res.json();
   console.log(user)

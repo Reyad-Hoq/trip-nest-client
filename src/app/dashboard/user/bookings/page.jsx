@@ -14,10 +14,10 @@ import { getSession } from "@/lib/actions/session";
 import Countdown from "@/components/tickets/Countdown";
 
 const statusColor = {
-  Pending: "bg-yellow-100 text-yellow-700",
-  Accepted: "bg-green-100 text-green-700",
-  Rejected: "bg-red-100 text-red-700",
-  Paid: "bg-blue-100 text-blue-700",
+  pending: "bg-yellow-100 text-yellow-700",
+  accepted: "bg-green-100 text-green-700",
+  rejected: "bg-red-100 text-red-700",
+  paid: "bg-blue-100 text-blue-700",
 };
 
 export default async function MyBookedTickets() {
@@ -81,7 +81,7 @@ export default async function MyBookedTickets() {
                 <div className="relative h-52">
 
                   <Image
-                    src={booking.image}
+                    src={booking.image || '/placeholder.svg'}
                     alt={booking.title}
                     fill
                     className="object-cover"
@@ -166,18 +166,17 @@ export default async function MyBookedTickets() {
                   <div
                     className={`rounded-xl py-3 text-center font-semibold ${statusColor[booking.status]}`}
                   >
-                    {booking.status}
+                    {(booking.status).charAt(0).toUpperCase() + (booking.status).slice(1)}
                   </div>
 
                   {/* Buttons */}
 
-                  {booking.status === "Accepted" && !expired && (
+                  {booking.status === "accepted" && !expired && (
                     <Link
                       href={`/payment/${booking._id}`}
                       className="flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[#1A1D7E] via-[#0D2284] to-[#183F98] px-5 py-3 font-semibold text-white"
                     >
-                      <CreditCard />
-
+                      <CreditCard className='w-4 h-4' />
                       Pay Now
                     </Link>
                   )}
