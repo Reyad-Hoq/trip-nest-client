@@ -28,7 +28,6 @@ export default function BookingModal({
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
     const booking = Object.fromEntries(formData.entries());
-    console.log("Booking data:", booking);
     const quantity = parseInt(booking.ticketQuantity, 10);
     const bookingData = {
       ticketId: ticket._id,
@@ -70,8 +69,6 @@ export default function BookingModal({
       }
 
       toast.success("Booking Successful");
-
-      onOpenChange(false);
 
     } catch (err) {
 
