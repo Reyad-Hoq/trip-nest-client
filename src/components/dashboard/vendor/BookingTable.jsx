@@ -24,7 +24,16 @@ const BookingTable = ({ requestBook }) => {
     }
   };
   return (
-    <section>
+    <section className='space-y-5'>
+      <div>
+        <h1 className="text-3xl font-bold text-[#1A1D7E]">
+          Requested Bookings
+        </h1>
+
+        <p className="text-slate-500">
+          Manage all tickets users have requested.
+        </p>
+      </div>
       <Table>
         <Table.ResizableContainer>
           <Table.Content aria-label="Table with resizable columns" className="min-w-1/2">

@@ -7,11 +7,11 @@ const AddedTicketsPage = async () => {
 
   if (!vendor?.id) return;
 
-  const vendorTickets = await getTickets({ vendorId: vendor?.id })
-  console.log(vendorTickets)
+  const data = await getTickets({ vendorId: vendor?.id })
+  const tickets = Array.isArray(data) ? data : data?.tickets || [];
   return (
-    <div className='w-full mx-auto'>
-      <MyTickets tickets={vendorTickets} />
+    <div className='w-full mx-auto my-5'>
+      <MyTickets tickets={tickets} />
     </div>
   );
 };

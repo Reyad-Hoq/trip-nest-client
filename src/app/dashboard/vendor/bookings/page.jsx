@@ -9,10 +9,9 @@ const BookingPage = async () => {
   const requestBook = await getBookings({
     vendorId: user?.id,
     status: "pending",
-  });
-  console.log(requestBook)
+  })
   return (
-    <div>
+    <div className='my-5'>
       {requestBook.length > 0 ? <BookingTable requestBook={requestBook} /> : <EmptyState />}
     </div>
   );

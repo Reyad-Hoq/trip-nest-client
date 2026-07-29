@@ -39,8 +39,7 @@ export default function AddedTickets({ tickets }) {
   }
 
   return (
-    <div>
-
+    <section >
       <div className="mb-8 flex items-center justify-between">
         <div>
           <h1 className="text-3xl font-bold text-[#1A1D7E]">
@@ -154,6 +153,6 @@ export default function AddedTickets({ tickets }) {
 
       </div>
 
-    </div>
+    </section>
   );
 }
