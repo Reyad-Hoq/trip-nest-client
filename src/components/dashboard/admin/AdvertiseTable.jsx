@@ -1,9 +1,30 @@
 'use client';
+import { updateTicketById } from '@/lib/actions/api/ticket';
 import { Check, Xmark } from '@gravity-ui/icons';
 import { Button, Chip, Table } from '@heroui/react';
+import { useRouter } from 'next/navigation';
 import React from 'react';
+import toast from 'react-hot-toast';
 
 const AdvertiseTable = ({ tickets }) => {
+  const router = useRouter()
+  const handleUpdate = async (ticketId, featured) => {
+    try {
+      const result = await updateTicketById(ticketId,
+        { featured });
+      if (result.modifiedCount > 0 && featured === true) {
+        toast.success('Ticket is featured');
+        router.refresh();
+      } else {
+        toast.error('Ticket is removed from featured')
+        router.refresh();
+      }
+      console.log(result)
+
+    } catch (err) {
+      toast.error(err.message);
+    }
+  };
   return (
     <div>
       <Table>
@@ -31,7 +52,7 @@ const AdvertiseTable = ({ tickets }) => {
                 <Table.ColumnResizer />
               </Table.Column>
               <Table.Column defaultWidth="1fr" id="status" minWidth={100}>
-                Status
+                Featured
                 <Table.ColumnResizer />
               </Table.Column>
               <Table.Column defaultWidth="1fr" id="email" minWidth={200}>
@@ -60,8 +81,8 @@ const AdvertiseTable = ({ tickets }) => {
                   </Table.Cell>
                   <Table.Cell>{ticket.operator}</Table.Cell>
                   <Table.Cell>
-                    <Chip color={`${ticket.status === "pending" ? "danger" : "success"}`} size="sm" variant="primary">
-                      {ticket.status}
+                    <Chip color={`${!ticket.featured ? "danger" : "success"}`} size="sm" variant="soft">
+                      {ticket.featured ? "Yes" : "No"}
                     </Chip>
                   </Table.Cell>
                   <Table.Cell>{ticket.vendorEmail}</Table.Cell>
@@ -69,7 +90,7 @@ const AdvertiseTable = ({ tickets }) => {
                     <div className="flex items-center gap-3">
                       <Button isIconOnly
                         onPress={() => {
-                          handleUpdate(ticket._id, 'available')
+                          handleUpdate(ticket._id, true)
                         }
                         }
                         size="sm" className="bg-green-400 hover:bg-green-400/50 hover:scale-105 transition-all  ease-in-out duration-150">
@@ -77,7 +98,7 @@ const AdvertiseTable = ({ tickets }) => {
                       </Button>
                       <Button isIconOnly
                         onPress={() => {
-                          handleUpdate(ticket._id, 'unavailable'
+                          handleUpdate(ticket._id, false
                           )
                         }}
                         size="sm" variant="danger">
@@ -88,7 +109,6 @@ const AdvertiseTable = ({ tickets }) => {
                 </Table.Row>
               </Table.Body>
             })
-
             }
           </Table.Content>
         </Table.ResizableContainer>

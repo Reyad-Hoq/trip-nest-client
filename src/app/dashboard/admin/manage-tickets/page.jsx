@@ -7,8 +7,8 @@ import { getTickets } from '@/lib/actions/api/ticket';
 
 const ManageTicketsPage = async () => {
 
-  const tickets = await getTickets({ status: "pending" });
-
+  const data = await getTickets({ status: "pending" });
+  const tickets = Array.isArray(data) ? data : data?.tickets || [];
   return (
     <section className="py-10">
       {
