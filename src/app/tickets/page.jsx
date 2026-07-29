@@ -1,4 +1,5 @@
 
+import TicketPagination, { PaginationBasic } from "@/components/shared/Pagination";
 import { getTickets } from "@/lib/actions/api/ticket";
 import Image from "next/image";
 import Link from "next/link";
@@ -14,40 +15,37 @@ const transportIcon = {
 export default async function TicketsPage({ searchParams }) {
   const params = await searchParams;
   console.log(params)
-  const tickets = await getTickets(params);
+  const {
+    tickets,
+    totalPages,
+    currentPage,
+  } = await getTickets({
+    ...params,
+    page: params.page
+  });
 
   return (
-    <section className="py-20 bg-slate-50">
+    <section className="py-10 bg-slate-50 space-y-10">
+      <PaginationBasic totalPages={totalPages} currentPage={currentPage} />
       <div className="mx-auto max-w-5xl px-5">
-
         {/* Heading */}
-
         <div className="mb-12 text-center">
           <h2 className="mt-4 text-4xl font-extrabold text-[#1A1D7E]">
             All kinds of Tickets
           </h2>
-
           <p className="mt-3 text-slate-500">
             Explore our hand-picked tickets with the best deals.
           </p>
-
         </div>
-
         {/* Cards */}
-
         <div className="grid gap-8 md:grid-cols-2 xl:grid-cols-3">
-
           {tickets.map((ticket) => (
-
             <div
               key={ticket._id}
               className="group overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-md transition duration-300 hover:-translate-y-2 hover:shadow-2xl"
             >
-
               {/* Image */}
-
               <div className="relative h-56 overflow-hidden">
-
                 <Image
                   src={ticket.image || '/placeholder.svg'}
                   alt={ticket.title}
@@ -55,74 +53,48 @@ export default async function TicketsPage({ searchParams }) {
                   fill
                   className="object-cover transition duration-500 group-hover:scale-110"
                 />
-
               </div>
-
               {/* Content */}
-
               <div className="space-y-4 p-6">
-
                 <h3 className="text-xl font-bold text-[#1A1D7E]">
                   {ticket.title}
                 </h3>
-
                 <div className="flex items-center justify-between">
-
                   <div>
-
                     <p className="text-xs uppercase tracking-wider text-slate-400">
                       Price
                     </p>
-
                     <p className="text-2xl font-bold text-blue-700">
                       ৳ {ticket.price}
                     </p>
-
                   </div>
-
                   <div className="text-right">
-
                     <p className="text-xs uppercase tracking-wider text-slate-400">
                       Seats
                     </p>
-
                     <p className="font-semibold text-slate-700">
                       {ticket.availableSeats}
                     </p>
-
                   </div>
-
                 </div>
-
                 <div className="flex items-center gap-2 rounded-xl bg-slate-100 px-4 py-3">
-
                   {transportIcon[ticket.transport]}
-
                   <span className="font-medium">
                     {ticket.transport}
                   </span>
-
                 </div>
-
                 {/* Perks */}
-
                 <div className="flex flex-wrap gap-2">
-
                   {ticket.perks.map((perk) => (
-
                     <span
                       key={perk}
                       className="rounded-full bg-blue-50 px-3 py-1 text-xs font-medium text-blue-700"
                     >
                       {perk}
                     </span>
-
                   ))}
-
                 </div>
-
                 {/* Button */}
-
                 <Link
                   href={`/tickets/${ticket._id}`}
                   className="flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[#1A1D7E] via-[#0D2284] to-[#183F98] px-5 py-3 font-semibold text-white transition hover:opacity-90"
@@ -130,16 +102,13 @@ export default async function TicketsPage({ searchParams }) {
                   See Details
                   <FaArrowRight />
                 </Link>
-
               </div>
-
             </div>
-
           ))}
 
         </div>
-
       </div>
+      <PaginationBasic totalPages={totalPages} currentPage={currentPage} />
     </section>
   );
 }
