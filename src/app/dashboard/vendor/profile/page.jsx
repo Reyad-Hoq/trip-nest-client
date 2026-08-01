@@ -12,12 +12,12 @@ import {
 } from "@gravity-ui/icons";
 
 import Info from '@/components/dashboard/vendor/VendorInfo';
-import { useSession } from '@/lib/auth-client';
 import { getAvatarColor } from '@/lib/actions/UserProfile/avatarColor';
 import { getUserProfilePhoto } from '@/lib/actions/UserProfile/userAvatar';
+import { getSession } from '@/lib/actions/session';
 
 const VendorProfilePage = () => {
-  const { data: session, isPending } = useSession();
+  const session = getSession()
   const vendor = session?.user;
   return (
     <Card className="overflow-hidden border border-slate-200 shadow-lg">

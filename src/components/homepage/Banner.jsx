@@ -70,8 +70,7 @@ export default function Banner() {
 
         {/* Overlay */}
 
-        <div className="absolute inset-0 bg-linear-to-r from-[#09B1EC/60
-] via-[#37C6FF]/30 to-transparent" />
+        <div className="absolute inset-0 bg-linear-to-r from-[#09B1EC/60] via-[#37C6FF]/30 to-transparent" />
 
         {/* Content */}
 

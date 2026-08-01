@@ -12,8 +12,6 @@ export const getTicketById = async (ticketId) => {
   return ticket;
 }
 export const updateTicketById = async (ticketId, data) => {
-  console.log(ticketId);
-  console.log(data);
   const res = await fetch(`${baseUrl}/api/tickets/${ticketId}`, {
     method: 'PATCH',
     headers: {
@@ -21,33 +19,15 @@ export const updateTicketById = async (ticketId, data) => {
     },
     body: JSON.stringify(data),
   });
-  console.log(res.body)
+ 
   if (!res.ok) {
     throw new Error('Failed to update ticket');
   }
   const ticket = await res.json();
-  console.log(ticket)
+  
   return ticket;
 }
 
-// export const getTickets = async (params = {}) => {
-
-//   const query = new URLSearchParams();
-
-//   Object.entries(params).forEach(([key, value]) => {
-//     if (value) {
-//       query.append(key, value);
-//     }
-//   });
-
-//   const url = `${baseUrl}/api/tickets?${query.toString()}`;
-
-//   const res = await fetch(url, {
-//     cache: "no-store",
-//   });
-
-//   return res.json();
-// };
 export const getTickets = async (params = {}) => {
   const query = new URLSearchParams();
 

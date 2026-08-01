@@ -21,11 +21,12 @@ export default async function TicketsPage({ searchParams }) {
     currentPage,
   } = await getTickets({
     ...params,
-    page: params.page
+    page: params.page,
+    status: "available",
   });
 
   return (
-    <section className="py-10 bg-slate-50 space-y-10">
+    <section className=" py-10 bg-slate-50 space-y-10">
       <PaginationBasic totalPages={totalPages} currentPage={currentPage} />
       <div className="mx-auto max-w-5xl px-5">
         {/* Heading */}
@@ -51,6 +52,7 @@ export default async function TicketsPage({ searchParams }) {
                   alt={ticket.title}
                   sizes="(max-width: 512px) 100vw, auto"
                   fill
+                  loading="eager"
                   className="object-cover transition duration-500 group-hover:scale-110"
                 />
               </div>

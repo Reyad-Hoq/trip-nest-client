@@ -1,6 +1,4 @@
-import { getSession } from "@/lib/actions/session";
-import { auth } from "@/lib/auth";
-import { headers } from "next/headers";
+import { getSession, getUserToken } from "@/lib/actions/session";
 import { redirect } from "next/navigation";
 
 export default async function DashboardPage() {

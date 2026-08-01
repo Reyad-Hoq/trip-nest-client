@@ -16,8 +16,6 @@ export const getUsers = async () => {
 }
 
 export const updateUserById = async (userId, data) => {
-  console.log(userId);
-  console.log(data);
   const res = await fetch(`${baseUrl}/api/users/${userId}`, {
     method: 'PATCH',
     headers: {
@@ -25,11 +23,10 @@ export const updateUserById = async (userId, data) => {
     },
     body: JSON.stringify(data),
   });
-  console.log(res.body)
+
   if (!res.ok) {
     throw new Error('Failed to update User');
   }
   const user = await res.json();
-  console.log(user)
   return user;
 }

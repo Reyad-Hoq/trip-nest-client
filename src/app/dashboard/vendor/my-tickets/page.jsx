@@ -7,7 +7,7 @@ const AddedTicketsPage = async () => {
 
   if (!vendor?.id) return;
 
-  const data = await getTickets({ vendorId: vendor?.id })
+  const data = await getTickets({ vendorId: vendor?.id, limit: 1000 });
   const tickets = Array.isArray(data) ? data : data?.tickets || [];
   return (
     <div className='w-full mx-auto my-5'>

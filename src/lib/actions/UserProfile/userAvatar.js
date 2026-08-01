@@ -1,3 +1,4 @@
+
 export function getUserProfilePhoto(name) {
   if (!name) return "U";
   const words = name.split(" ");

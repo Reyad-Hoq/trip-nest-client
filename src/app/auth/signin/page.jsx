@@ -19,10 +19,11 @@ import {
   FaCircleExclamation,
 } from "react-icons/fa6";
 
-import { authClient } from "@/lib/auth-client";
+import { authClient, useSession } from "@/lib/auth-client";
 
 const LoginPage = () => {
   const router = useRouter();
+  const { refetch } = useSession();
 
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
@@ -59,9 +60,11 @@ const LoginPage = () => {
 
     if (data) {
       setSuccessMessage("Login successful. Redirecting...");
+      await refetch();
+
+      router.refresh();
 
       router.push("/");
-      router.refresh();
     }
   };
 

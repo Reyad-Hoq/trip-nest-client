@@ -6,7 +6,6 @@ import React from 'react';
 const page = async () => {
   const data = await getTickets({ status: 'available', limit: 1000 });
   const tickets = Array.isArray(data) ? data : data?.tickets || [];
-  console.log(tickets.length)
   return (
     <div>
       <AdvertiseTable tickets={tickets} />

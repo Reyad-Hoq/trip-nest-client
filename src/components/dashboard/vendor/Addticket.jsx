@@ -29,6 +29,7 @@ import {
 
 import { useSession } from "@/lib/auth-client";
 import Image from "next/image";
+import { authHeader } from "@/lib/actions/server";
 
 export default function AddTicketPage() {
 
@@ -100,13 +101,12 @@ export default function AddTicketPage() {
       ticket.image = imageUrl;
       ticket.perks = selected;
       ticket.duration = calculateDuration(ticket.departure, ticket.arrival);
-      console.log(ticket);
 
-      // Part-2 এ backend request হবে
       const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/tickets`, {
         method: "POST",
         headers: {
           'content-type': 'application/json',
+          ...await authHeader()
         },
         body: JSON.stringify(ticket),
       });

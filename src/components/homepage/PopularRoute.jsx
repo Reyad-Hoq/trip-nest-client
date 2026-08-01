@@ -31,7 +31,7 @@ const routes = [
 export default function PopularRoutes() {
   return (
     <section className="bg-white py-20">
-      <div className="mx-auto max-w-6xl px-5">
+      <div className="mx-auto max-w-5xl px-5">
         <div className="mb-12 text-center">
           <span className="rounded-full bg-blue-100 px-4 py-1 text-sm font-semibold text-blue-700">
             Popular Routes

@@ -60,12 +60,12 @@ const UserProfile = ({ user }) => {
 
               <div className="mt-4 flex flex-wrap gap-3">
 
-                <Chip color="primary" variant="flat">
+                <Chip color="accent" variant="soft">
                   {user?.role?.toUpperCase()}
                 </Chip>
 
-                <Chip color="success" variant="flat">
-                  Verified
+                <Chip color={user.emailVerified ? "success" : "danger"} variant="primary">
+                  {user.emailVerified ? "Verified" : "Not Verified"}
                 </Chip>
 
               </div>

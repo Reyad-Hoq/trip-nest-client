@@ -1,6 +1,7 @@
 import { betterAuth } from "better-auth";
 import { MongoClient } from "mongodb";
 import { mongodbAdapter } from "better-auth/adapters/mongodb";
+import { jwt } from "better-auth/plugins"
 
 const client = new MongoClient(process.env.MONGO_URI);
 const db = client.db("tripnest_db");
@@ -13,8 +14,8 @@ export const auth = betterAuth({
     additionalFields: {
       role: {
         type: "string",
-        required: false,
-        default: "user",
+        input: false,
+        defaultValue: "user",
       },
     },
   },
@@ -27,4 +28,7 @@ export const auth = betterAuth({
   database: mongodbAdapter(db, {
     client
   }),
+  plugins: [
+    jwt()
+  ]
 });

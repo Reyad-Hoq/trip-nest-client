@@ -13,7 +13,6 @@ const transportIcon = {
 
 export default async function AdvertisementSection() {
   const data = await getTickets({ featured: "true" });
-  console.log(data)
   const tickets = Array.isArray(data) ? data : data?.tickets || [];
   return (
     <section className="py-20 bg-slate-50">

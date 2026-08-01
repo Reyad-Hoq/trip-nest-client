@@ -5,9 +5,6 @@ import { Button, Separator } from "@heroui/react";
 
 import {
   FaFacebookF,
-  FaStripe,
-  FaCcVisa,
-  FaCcMastercard,
 } from "react-icons/fa6";
 
 import {
@@ -17,7 +14,6 @@ import {
 import {
   MdEmail,
   MdPhone,
-  MdLocationOn,
 } from "react-icons/md";
 
 import {
@@ -55,7 +51,6 @@ export default function Footer() {
           {/* Logo */}
 
           <div>
-
             <Link
               href="/"
               className="flex items-center gap-3"
@@ -63,31 +58,22 @@ export default function Footer() {
               <BsTrainFreightFront
                 size={40}
               />
-
               <div>
-
                 <h2 className="text-lg font-extrabold tracking-tight text-white">
                   TripNest
                 </h2>
-
-                <p className="text-[12px]
-                text-slate-400">
+                <p className="text-[12px]  text-slate-400">
                   Book Smarter. Travel Better.
                 </p>
-
               </div>
-
             </Link>
-
             <p className="mt-6 leading-7 text-slate-300">
               Book bus, train, launch &
               flight tickets easily with
               secure online payment and
               instant booking confirmation.
             </p>
-
             <div className="mt-8 flex gap-3">
-
               <Button
                 isIconOnly
                 radius="full"
@@ -96,9 +82,7 @@ export default function Footer() {
               >
                 <FaFacebookF />
               </Button>
-
             </div>
-
           </div>
 
           {/* Quick Links */}
@@ -213,27 +197,38 @@ export default function Footer() {
             <div className="grid grid-cols-3 gap-2">
 
               <div className="rounded w-12 h-10 bg-white flex justify-center items-center shadow">
-
-
-                <Image src="/Stripe.svg" alt="stripe-payment" width={40} height={40} />
+                <Image
+                  src="/Stripe.svg" alt="stripe-payment"
+                  width={40}
+                  height={40}
+                  className="w-auto h-auto" />
               </div>
 
               <div className="rounded w-12 h-10 bg-white flex justify-center items-center shadow">
-
-
-                <Image src="/Visa.svg" alt="visa-payment" width={40} height={40} />
+                <Image
+                  src="/Visa.svg"
+                  alt="visa-payment"
+                  width={40}
+                  height={40}
+                  className="w-auto h-auto"
+                />
               </div>
 
               <div className="rounded w-12 h-10 bg-white flex justify-center items-center shadow">
-
-
-                <Image src="/Mastercard.svg" alt="mastercard-payment" width={40} height={40} />
+                <Image
+                  src="/Mastercard.svg" alt="mastercard-payment"
+                  width={40}
+                  height={40}
+                  className="w-auto h-auto" />
               </div>
 
               <div className="rounded w-12 h-10 bg-white flex justify-center items-center shadow">
-
-                <Image src="/Amex.svg" alt="amex" width={40} height={40} />
-
+                <Image
+                  src="/Amex.svg"
+                  alt="amex-payment"
+                  width={40}
+                  height={40}
+                  className="w-auto h-auto" />
               </div>
 
             </div>

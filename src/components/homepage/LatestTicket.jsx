@@ -1,5 +1,5 @@
 
-import { getLatestTickets, getTickets } from "@/lib/actions/tickets";
+import { getTickets } from "@/lib/actions/api/ticket";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -18,7 +18,7 @@ const transportIcon = {
 };
 
 export default async function LatestTickets() {
-  const data = await getLatestTickets();
+  const data = await getTickets({ status: "available", limit: 6 });
   const tickets = Array.isArray(data) ? data : data?.tickets || [];
   return (
     <section className="bg-white py-20">
@@ -73,6 +73,9 @@ export default async function LatestTickets() {
                   src={ticket.image || '/placeholder.svg'}
                   alt={ticket.title}
                   fill
+                  sizes="(max-width: 768px) 100vw,
+         (max-width: 1200px) 50vw,
+         33vw"
                   className="object-cover transition duration-500 group-hover:scale-110"
                 />
 
