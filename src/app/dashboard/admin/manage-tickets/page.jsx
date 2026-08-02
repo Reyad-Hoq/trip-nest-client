@@ -1,6 +1,4 @@
 
-export const dynamic = "force-dynamic";
-
 import TicketTable from '@/components/dashboard/admin/TicketTable';
 import EmptyState from '@/components/shared/EmptyState';
 import { getTickets } from '@/lib/actions/api/ticket';

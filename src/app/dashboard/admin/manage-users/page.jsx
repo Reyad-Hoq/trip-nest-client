@@ -1,4 +1,3 @@
-export const dynamic = "force-dynamic";
 
 import UserTable from '@/components/dashboard/admin/UserTable';
 import { getUsers } from '@/lib/actions/api/users';

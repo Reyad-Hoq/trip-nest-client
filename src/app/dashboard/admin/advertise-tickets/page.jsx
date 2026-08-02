@@ -1,4 +1,4 @@
-export const dynamic = "force-dynamic";
+
 import AdvertiseTable from '@/components/dashboard/admin/AdvertiseTable';
 import { PaginationBasic } from '@/components/shared/Pagination';
 import { getTickets } from '@/lib/actions/api/ticket';
