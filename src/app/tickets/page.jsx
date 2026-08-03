@@ -26,7 +26,9 @@ export default async function TicketsPage({ searchParams }) {
   });
 
   return (
-    <section className=" py-10 bg-slate-50 space-y-10">
+    <section className=" py-10 bg-slate-50 space-y-10 flex flex-col items-center justify-center
+    
+    ">
       <PaginationBasic totalPages={totalPages} currentPage={currentPage} />
       <div className="mx-auto max-w-5xl px-5">
         {/* Heading */}

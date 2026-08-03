@@ -1,8 +1,15 @@
+import { authHeader } from "../server";
+
 const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
 
 export const getUsers = async () => {
   try {
-    const res = await fetch(`${baseUrl}/api/users`);
+    const res = await fetch(`${baseUrl}/api/users`, {
+      method: 'GET',
+      headers: {
+        ... await authHeader()
+      }
+    });
     if (!res.ok) {
       throw new Error("Failed to fetch users");
     }
@@ -20,6 +27,7 @@ export const updateUserById = async (userId, data) => {
     method: 'PATCH',
     headers: {
       'content-type': 'application/json',
+      ... await authHeader(),
     },
     body: JSON.stringify(data),
   });

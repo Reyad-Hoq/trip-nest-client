@@ -1,6 +1,5 @@
 
 import AdvertiseTable from '@/components/dashboard/admin/AdvertiseTable';
-import { PaginationBasic } from '@/components/shared/Pagination';
 import { getTickets } from '@/lib/actions/api/ticket';
 import React from 'react';
 const page = async () => {

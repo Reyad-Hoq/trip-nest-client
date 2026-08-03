@@ -1,3 +1,5 @@
+import { authHeader } from "../server";
+
 const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
 
 export const getVendorTickets = async (vendorId) => {
@@ -16,15 +18,16 @@ export const updateTicketById = async (ticketId, data) => {
     method: 'PATCH',
     headers: {
       'content-type': 'application/json',
+      ... await authHeader()
     },
     body: JSON.stringify(data),
   });
- 
+
   if (!res.ok) {
     throw new Error('Failed to update ticket');
   }
   const ticket = await res.json();
-  
+
   return ticket;
 }
 

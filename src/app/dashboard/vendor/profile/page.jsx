@@ -14,10 +14,11 @@ import {
 import Info from '@/components/dashboard/vendor/VendorInfo';
 import { getAvatarColor } from '@/lib/actions/UserProfile/avatarColor';
 import { getUserProfilePhoto } from '@/lib/actions/UserProfile/userAvatar';
-import { getSession } from '@/lib/actions/session';
+
+import { useSession } from '@/lib/auth-client';
 
 const VendorProfilePage = () => {
-  const session = getSession()
+  const { data: session } = useSession();
   const vendor = session?.user;
   return (
     <Card className="overflow-hidden border border-slate-200 shadow-lg">

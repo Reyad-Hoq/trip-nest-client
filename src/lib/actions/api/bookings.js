@@ -1,3 +1,5 @@
+import { authHeader } from "../server";
+
 const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
 
 // export const getBookings = async (userId) => {
@@ -27,7 +29,12 @@ export const getBookings = async (params = {}) => {
   });
 
   const res = await fetch(
-    `${baseUrl}/api/bookings?${query.toString()}`,
+    `${baseUrl}/api/bookings?${query.toString()}`, {
+    method: "GET",
+    headers: {
+      ... await authHeader()
+    }
+  },
     {
       cache: "no-store",
     }

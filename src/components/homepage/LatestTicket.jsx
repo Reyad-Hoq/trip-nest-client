@@ -18,7 +18,7 @@ const transportIcon = {
 };
 
 export default async function LatestTickets() {
-  const data = await getTickets({ status: "available", limit: 6 });
+  const data = await getTickets({ status: "available", limit: 6, latest: "true" });
   const tickets = Array.isArray(data) ? data : data?.tickets || [];
   return (
     <section className="bg-white py-20">
