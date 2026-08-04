@@ -31,13 +31,11 @@ export const getBookings = async (params = {}) => {
   const res = await fetch(
     `${baseUrl}/api/bookings?${query.toString()}`, {
     cache: "no-store",
-  }, {
     method: "GET",
     headers: {
       ... await authHeader()
     }
-  },
-
+  }
   );
 
   if (!res.ok) {
