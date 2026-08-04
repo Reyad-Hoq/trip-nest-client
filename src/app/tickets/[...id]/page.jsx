@@ -44,7 +44,7 @@ export default async function TicketDetailsPage({ params }) {
             <div className="relative h-[420px]">
 
               <Image
-                src={ticket.image}
+                src={ticket.image || "/placeholder.svg"}
                 alt={ticket.title}
                 fill
                 className="object-cover"

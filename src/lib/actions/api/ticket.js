@@ -15,6 +15,7 @@ export const getTicketById = async (ticketId) => {
 }
 export const updateTicketById = async (ticketId, data) => {
   const res = await fetch(`${baseUrl}/api/tickets/${ticketId}`, {
+    catche: "no-store",
     method: 'PATCH',
     headers: {
       'content-type': 'application/json',
@@ -48,7 +49,9 @@ export const getTickets = async (params = {}) => {
 
   const url = `${baseUrl}/api/tickets?${query.toString()}`;
 
-  const res = await fetch(url, { cache: "no-store" });
+  const res = await fetch(url,
+    { cache: "no-store" }
+  );
 
   if (!res.ok) {
     throw new Error(`Failed to fetch tickets: ${res.status}`);
