@@ -9,7 +9,6 @@ import { useRouter } from 'next/navigation';
 const UserTable = ({ users }) => {
   const router = useRouter();
   const handleRoleUpdate = async (userId, role, userName) => {
-    console.log(userId, role)
     try {
       const result = await updateUserById(userId,
         { role });
@@ -20,7 +19,6 @@ const UserTable = ({ users }) => {
         toast.error('Something went wrong')
         router.refresh();
       }
-      console.log(result)
 
     } catch (err) {
       toast.error(err.message);
@@ -37,7 +35,6 @@ const UserTable = ({ users }) => {
         toast.error('Something went wrong')
         router.refresh();
       }
-      console.log(result)
 
     } catch (err) {
       toast.error(err.message);

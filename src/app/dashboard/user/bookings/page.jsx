@@ -5,12 +5,12 @@ import Link from "next/link";
 import {
   Calendar,
   Clock,
-  CreditCard,
   Ticket,
 } from "@gravity-ui/icons";
 import { getBookings } from "@/lib/actions/api/bookings";
 import { getSession } from "@/lib/actions/session";
 import Countdown from "@/components/tickets/Countdown";
+import PayButton from "@/components/dashboard/user/PayButton";
 
 const statusColor = {
   pending: "bg-yellow-100 text-yellow-700",
@@ -30,7 +30,7 @@ export default async function MyBookedTickets() {
   const bookings = await getBookings(userId);
 
   return (
-    <section className="w-11/12 mx-auto space-y-8 my-8">
+    <section className="w-10/12 mx-auto space-y-8 my-8">
 
       <div>
         <h1 className="text-3xl font-bold text-[#1A1D7E]">
@@ -61,7 +61,7 @@ export default async function MyBookedTickets() {
           </Link>
         </div>
       ) : (
-        <div className="grid gap-7 md:grid-cols-2 xl:grid-cols-">
+        <div className="grid gap-7 md:grid-cols-2 xl:grid-cols-3">
 
           {bookings.map((booking) => {
 
@@ -171,13 +171,8 @@ export default async function MyBookedTickets() {
                   {/* Buttons */}
 
                   {booking.status === "accepted" && !expired && (
-                    <Link
-                      href={`/payment/${booking._id}`}
-                      className="flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[#1A1D7E] via-[#0D2284] to-[#183F98] px-5 py-3 font-semibold text-white"
-                    >
-                      <CreditCard className='w-4 h-4' />
-                      Pay Now
-                    </Link>
+                    <PayButton bookingId={booking._id} />
+
                   )}
 
                   {booking.status === "Paid" && (

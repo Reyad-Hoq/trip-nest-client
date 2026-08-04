@@ -8,7 +8,6 @@ export async function getSession() {
     const session = await auth.api.getSession({
       headers: await headers(),
     });
-    console.log(session)
     return session?.user || null;
   } catch (error) {
     console.error("getSession error:", error);
@@ -21,7 +20,6 @@ export const getUserToken = async () => {
     const session = await auth.api.getSession({
       headers: await headers(),
     });
-    console.log(session?.session?.token)
     return session?.session?.token || null;
   } catch (error) {
     console.error("getUserToken error:", error);

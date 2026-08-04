@@ -50,6 +50,7 @@ export const updateBookingById = async (bookingId, data) => {
     method: "PATCH",
     headers: {
       "Content-Type": "application/json",
+      ... await authHeader()
     },
     body: JSON.stringify(data),
   });

@@ -48,7 +48,6 @@ const RegisterPage = () => {
       password: user.password,
       role: user.role,
     });
-    console.log(user);
     setLoading(false);
 
     if (error) {

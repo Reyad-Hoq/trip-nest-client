@@ -37,7 +37,6 @@ export default function BookingModal({
       userName: user?.name,
       userEmail: user?.email,
     };
-    console.log("Booking data:", bookingData);
     if (quantity <= 0) {
       return toast.error("Quantity must be at least 1");
     }

@@ -27,7 +27,6 @@ export default function SearchBox() {
     const formData = new FormData(e.currentTarget);
 
     const form = Object.fromEntries(formData.entries())
-    console.log(form);
     const { from, to, transport, date } = form;
     const params = new URLSearchParams();
     if (from) params.append("from", from);
@@ -38,7 +37,6 @@ export default function SearchBox() {
     router.push(
       `/tickets?${params.toString()}`
     );
-    console.log(params)
   };
 
   return (

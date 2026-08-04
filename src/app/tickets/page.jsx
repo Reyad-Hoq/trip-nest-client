@@ -14,7 +14,6 @@ const transportIcon = {
 
 export default async function TicketsPage({ searchParams }) {
   const params = await searchParams;
-  console.log(params)
   const {
     tickets,
     totalPages,

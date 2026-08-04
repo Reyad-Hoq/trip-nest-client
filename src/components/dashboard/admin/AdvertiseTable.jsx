@@ -19,7 +19,6 @@ const AdvertiseTable = ({ tickets }) => {
         toast.error('Ticket is removed from featured')
         router.refresh();
       }
-      console.log(result)
 
     } catch (err) {
       toast.error(err.message);

@@ -22,7 +22,6 @@ const TicketTable = ({ tickets }) => {
         toast.error('Ticket is not Approved')
         router.refresh();
       }
-      console.log(result)
 
     } catch (err) {
       toast.error(err.message);
