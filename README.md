@@ -4,12 +4,12 @@ TripNest is a modern ticket booking platform built with **Next.js** where users 
 
 ## 🚀 Live Demo
 
-<<<<<<< HEAD
+
 https://your-client-url.vercel.app
 
-=======
+
 https://tripnest-five.vercel.app
->>>>>>> 25f2d32 (readme file updated)
+
 ---
 
 ## ✨ Features
