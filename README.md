@@ -66,12 +66,14 @@ https://tripnest-five.vercel.app
 - React Hot Toast
 
 ---
-📁 Folder Structure
-src
- ├── app
- ├── components
- ├── lib
- └── middleware
+## 📁 Folder Structure
+
+###
+- src
+- ├── app
+- ├── components
+- ├── lib
+- └── middleware
 
 ## 📦 Installation
 
